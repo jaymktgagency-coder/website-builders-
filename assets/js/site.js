@@ -141,15 +141,19 @@
         get('f-process')
       ].join('\n');
 
-      window.location.href = CONTACT_ADDRESS
+      var href = CONTACT_ADDRESS
         + '?subject=' + encodeURIComponent('Enquiry from ' + get('f-company'))
         + '&body=' + encodeURIComponent(body);
 
+      /* Paint the fallback line before navigating: assigning location.href
+         first can pre-empt the repaint, leaving the visitor with nothing to
+         read if no mail client opens. */
       if (status) {
         status.removeAttribute('data-tone');
         status.textContent = 'Opening your email client. If nothing happens, write to '
           + CONTACT_ADDRESS.replace('mailto:', '') + ' directly.';
       }
+      window.setTimeout(function () { window.location.href = href; }, 60);
       return;
     }
 
