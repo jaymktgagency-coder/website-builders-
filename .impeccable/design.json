@@ -1,0 +1,849 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-14T00:00:00Z",
+  "title": "Design System: systim",
+  "source": {
+    "artifact": [
+      "index.html",
+      "assets/css/site.css",
+      "assets/js/site.js"
+    ],
+    "direction": "The Control Room",
+    "seedKey": "57393fa3",
+    "note": "Every value recorded here was read out of assets/css/site.css as shipped. Light is the default ground; dark values carry the -dark suffix. Re-read after the post-documentation repair round, which removed the orphan .mimic__pulse span, introduced --lamp-ring as a distinct role from --rule-strong, and made .field input:hover an actual state (--rule-strong -> --ink-mute). Mimic timing was not touched."
+  },
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Instrument Paper",
+        "canonical": "#F4F2EE",
+        "oklch": "oklch(96.2% 0.006 84.6)",
+        "purpose": "Default ground plane; also the text colour that sits on ink.",
+        "tonalRamp": [
+          "oklch(15% 0.006 84.6)",
+          "oklch(26% 0.006 84.6)",
+          "oklch(37% 0.006 84.6)",
+          "oklch(48% 0.006 84.6)",
+          "oklch(59% 0.006 84.6)",
+          "oklch(70% 0.006 84.6)",
+          "oklch(82% 0.006 84.6)",
+          "oklch(95% 0.006 84.6)"
+        ]
+      },
+      "ground-sunken": {
+        "role": "neutral",
+        "displayName": "Recessed Panel",
+        "canonical": "#EDEAE4",
+        "oklch": "oklch(93.8% 0.009 84.6)",
+        "purpose": "The single sunken plane, used only on .band--sunken.",
+        "tonalRamp": [
+          "oklch(15% 0.009 84.6)",
+          "oklch(26% 0.009 84.6)",
+          "oklch(37% 0.009 84.6)",
+          "oklch(48% 0.009 84.6)",
+          "oklch(59% 0.009 84.6)",
+          "oklch(70% 0.009 84.6)",
+          "oklch(82% 0.009 84.6)",
+          "oklch(95% 0.009 84.6)"
+        ]
+      },
+      "ground-elev": {
+        "role": "neutral",
+        "displayName": "Lit Plane",
+        "canonical": "#FBFAF7",
+        "oklch": "oklch(98.5% 0.004 91.4)",
+        "purpose": "The raised plane: the deliverable frame and form inputs, nothing else.",
+        "tonalRamp": [
+          "oklch(15% 0.004 91.4)",
+          "oklch(26% 0.004 91.4)",
+          "oklch(37% 0.004 91.4)",
+          "oklch(48% 0.004 91.4)",
+          "oklch(59% 0.004 91.4)",
+          "oklch(70% 0.004 91.4)",
+          "oklch(82% 0.004 91.4)",
+          "oklch(95% 0.004 91.4)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Graphite Ink",
+        "canonical": "#16150F",
+        "oklch": "oklch(19.5% 0.012 99.5)",
+        "purpose": "Headings, marks, stage names, input text, the submit fill.",
+        "tonalRamp": [
+          "oklch(15% 0.012 99.5)",
+          "oklch(26% 0.012 99.5)",
+          "oklch(37% 0.012 99.5)",
+          "oklch(48% 0.012 99.5)",
+          "oklch(59% 0.012 99.5)",
+          "oklch(70% 0.012 99.5)",
+          "oklch(82% 0.012 99.5)",
+          "oklch(95% 0.012 99.5)"
+        ]
+      },
+      "ink-body": {
+        "role": "neutral",
+        "displayName": "Reading Ink",
+        "canonical": "#46443C",
+        "oklch": "oklch(38.6% 0.013 95.4)",
+        "purpose": "Body copy, nav links at rest, deliverable descriptions.",
+        "tonalRamp": [
+          "oklch(15% 0.013 95.4)",
+          "oklch(26% 0.013 95.4)",
+          "oklch(37% 0.013 95.4)",
+          "oklch(48% 0.013 95.4)",
+          "oklch(59% 0.013 95.4)",
+          "oklch(70% 0.013 95.4)",
+          "oklch(82% 0.013 95.4)",
+          "oklch(95% 0.013 95.4)"
+        ]
+      },
+      "ink-mute": {
+        "role": "neutral",
+        "displayName": "Instrument Grey",
+        "canonical": "#6B6859",
+        "oklch": "oklch(51.6% 0.023 97.8)",
+        "purpose": "Every monospace readout, record titles, notes and hints.",
+        "tonalRamp": [
+          "oklch(15% 0.023 97.8)",
+          "oklch(26% 0.023 97.8)",
+          "oklch(37% 0.023 97.8)",
+          "oklch(48% 0.023 97.8)",
+          "oklch(59% 0.023 97.8)",
+          "oklch(70% 0.023 97.8)",
+          "oklch(82% 0.023 97.8)",
+          "oklch(95% 0.023 97.8)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#C9C5BC",
+        "oklch": "oklch(82.4% 0.013 86.8)",
+        "purpose": "The diagram: band tops, row rules, frame borders, the unlit rail.",
+        "tonalRamp": [
+          "oklch(15% 0.013 86.8)",
+          "oklch(26% 0.013 86.8)",
+          "oklch(37% 0.013 86.8)",
+          "oklch(48% 0.013 86.8)",
+          "oklch(59% 0.013 86.8)",
+          "oklch(70% 0.013 86.8)",
+          "oklch(82% 0.013 86.8)",
+          "oklch(95% 0.013 86.8)"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "#A29D92",
+        "oklch": "oklch(69.7% 0.017 86.4)",
+        "purpose": "Lines that indicate rather than divide: ruled-link and nav-action underlines, the theme toggle's hover border, the stage note's left rule, input resting borders, and the scrollbar (scrollbar-color and the webkit thumb). It does not touch lamps.",
+        "tonalRamp": [
+          "oklch(15% 0.017 86.4)",
+          "oklch(26% 0.017 86.4)",
+          "oklch(37% 0.017 86.4)",
+          "oklch(48% 0.017 86.4)",
+          "oklch(59% 0.017 86.4)",
+          "oklch(70% 0.017 86.4)",
+          "oklch(82% 0.017 86.4)",
+          "oklch(95% 0.017 86.4)"
+        ]
+      },
+      "lamp-ring": {
+        "role": "neutral",
+        "displayName": "Lamp Ring",
+        "canonical": "#8A857A",
+        "oklch": "oklch(61.8% 0.017 86.5)",
+        "purpose": "The bezel of an unlit lamp, and nothing else. Five usages, all lamp-related: the mimic dot's 1.5px border, the 0% and 22%/100% keyframe stops, the reduced-motion lamp override, and the 1px record lamp ring. Measured 3.29:1 against --ground, clearing WCAG 1.4.11's 3:1 floor for a non-text indicator.",
+        "tonalRamp": [
+          "oklch(15% 0.017 86.5)",
+          "oklch(26% 0.017 86.5)",
+          "oklch(37% 0.017 86.5)",
+          "oklch(48% 0.017 86.5)",
+          "oklch(59% 0.017 86.5)",
+          "oklch(70% 0.017 86.5)",
+          "oklch(82% 0.017 86.5)",
+          "oklch(95% 0.017 86.5)"
+        ]
+      },
+      "live": {
+        "role": "primary",
+        "displayName": "Signal Green",
+        "canonical": "#17724A",
+        "oklch": "oklch(49.0% 0.105 158.8)",
+        "purpose": "Focus ring, caret, selection, hovered links and rules, focused field border, submit hover, success status.",
+        "tonalRamp": [
+          "oklch(15% 0.105 158.8)",
+          "oklch(26% 0.105 158.8)",
+          "oklch(37% 0.105 158.8)",
+          "oklch(48% 0.105 158.8)",
+          "oklch(59% 0.105 158.8)",
+          "oklch(70% 0.105 158.8)",
+          "oklch(82% 0.105 158.8)",
+          "oklch(95% 0.105 158.8)"
+        ]
+      },
+      "live-dot": {
+        "role": "primary",
+        "displayName": "Signal Green Lamp",
+        "canonical": "#1B8A57",
+        "oklch": "oklch(56.1% 0.124 157.4)",
+        "purpose": "Lamp fill and ring at the instant the mimic sweep reaches it.",
+        "tonalRamp": [
+          "oklch(15% 0.124 157.4)",
+          "oklch(26% 0.124 157.4)",
+          "oklch(37% 0.124 157.4)",
+          "oklch(48% 0.124 157.4)",
+          "oklch(59% 0.124 157.4)",
+          "oklch(70% 0.124 157.4)",
+          "oklch(82% 0.124 157.4)",
+          "oklch(95% 0.124 157.4)"
+        ]
+      },
+      "danger": {
+        "role": "tertiary",
+        "displayName": "Fault Red",
+        "canonical": "#A3341F",
+        "oklch": "oklch(48.6% 0.150 32.8)",
+        "purpose": "Field errors, invalid field borders, error-toned form status. Contact form only.",
+        "tonalRamp": [
+          "oklch(15% 0.150 32.8)",
+          "oklch(26% 0.150 32.8)",
+          "oklch(37% 0.150 32.8)",
+          "oklch(48% 0.150 32.8)",
+          "oklch(59% 0.150 32.8)",
+          "oklch(70% 0.150 32.8)",
+          "oklch(82% 0.150 32.8)",
+          "oklch(95% 0.150 32.8)"
+        ]
+      },
+      "ground-dark": {
+        "role": "neutral",
+        "displayName": "Instrument Paper (dark)",
+        "canonical": "#171614",
+        "oklch": "oklch(20.1% 0.004 84.6)",
+        "purpose": "Dark-theme default ground plane.",
+        "tonalRamp": [
+          "oklch(15% 0.004 84.6)",
+          "oklch(26% 0.004 84.6)",
+          "oklch(37% 0.004 84.6)",
+          "oklch(48% 0.004 84.6)",
+          "oklch(59% 0.004 84.6)",
+          "oklch(70% 0.004 84.6)",
+          "oklch(82% 0.004 84.6)",
+          "oklch(95% 0.004 84.6)"
+        ]
+      },
+      "ground-sunken-dark": {
+        "role": "neutral",
+        "displayName": "Recessed Panel (dark)",
+        "canonical": "#121110",
+        "oklch": "oklch(17.8% 0.003 67.7)",
+        "purpose": "Dark-theme sunken plane.",
+        "tonalRamp": [
+          "oklch(15% 0.003 67.7)",
+          "oklch(26% 0.003 67.7)",
+          "oklch(37% 0.003 67.7)",
+          "oklch(48% 0.003 67.7)",
+          "oklch(59% 0.003 67.7)",
+          "oklch(70% 0.003 67.7)",
+          "oklch(82% 0.003 67.7)",
+          "oklch(95% 0.003 67.7)"
+        ]
+      },
+      "ground-elev-dark": {
+        "role": "neutral",
+        "displayName": "Lit Plane (dark)",
+        "canonical": "#1F1E1B",
+        "oklch": "oklch(23.5% 0.006 91.6)",
+        "purpose": "Dark-theme raised plane.",
+        "tonalRamp": [
+          "oklch(15% 0.006 91.6)",
+          "oklch(26% 0.006 91.6)",
+          "oklch(37% 0.006 91.6)",
+          "oklch(48% 0.006 91.6)",
+          "oklch(59% 0.006 91.6)",
+          "oklch(70% 0.006 91.6)",
+          "oklch(82% 0.006 91.6)",
+          "oklch(95% 0.006 91.6)"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Graphite Ink (dark)",
+        "canonical": "#F2EFE9",
+        "oklch": "oklch(95.3% 0.009 84.6)",
+        "purpose": "Dark-theme heading and mark ink.",
+        "tonalRamp": [
+          "oklch(15% 0.009 84.6)",
+          "oklch(26% 0.009 84.6)",
+          "oklch(37% 0.009 84.6)",
+          "oklch(48% 0.009 84.6)",
+          "oklch(59% 0.009 84.6)",
+          "oklch(70% 0.009 84.6)",
+          "oklch(82% 0.009 84.6)",
+          "oklch(95% 0.009 84.6)"
+        ]
+      },
+      "ink-body-dark": {
+        "role": "neutral",
+        "displayName": "Reading Ink (dark)",
+        "canonical": "#BAB7AE",
+        "oklch": "oklch(77.9% 0.013 91.5)",
+        "purpose": "Dark-theme body copy.",
+        "tonalRamp": [
+          "oklch(15% 0.013 91.5)",
+          "oklch(26% 0.013 91.5)",
+          "oklch(37% 0.013 91.5)",
+          "oklch(48% 0.013 91.5)",
+          "oklch(59% 0.013 91.5)",
+          "oklch(70% 0.013 91.5)",
+          "oklch(82% 0.013 91.5)",
+          "oklch(95% 0.013 91.5)"
+        ]
+      },
+      "ink-mute-dark": {
+        "role": "neutral",
+        "displayName": "Instrument Grey (dark)",
+        "canonical": "#8C8980",
+        "oklch": "oklch(63.0% 0.014 91.6)",
+        "purpose": "Dark-theme readouts.",
+        "tonalRamp": [
+          "oklch(15% 0.014 91.6)",
+          "oklch(26% 0.014 91.6)",
+          "oklch(37% 0.014 91.6)",
+          "oklch(48% 0.014 91.6)",
+          "oklch(59% 0.014 91.6)",
+          "oklch(70% 0.014 91.6)",
+          "oklch(82% 0.014 91.6)",
+          "oklch(95% 0.014 91.6)"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark)",
+        "canonical": "#34322E",
+        "oklch": "oklch(31.8% 0.008 84.6)",
+        "purpose": "Dark-theme dividing hairline.",
+        "tonalRamp": [
+          "oklch(15% 0.008 84.6)",
+          "oklch(26% 0.008 84.6)",
+          "oklch(37% 0.008 84.6)",
+          "oklch(48% 0.008 84.6)",
+          "oklch(59% 0.008 84.6)",
+          "oklch(70% 0.008 84.6)",
+          "oklch(82% 0.008 84.6)",
+          "oklch(95% 0.008 84.6)"
+        ]
+      },
+      "rule-strong-dark": {
+        "role": "neutral",
+        "displayName": "Strong Hairline (dark)",
+        "canonical": "#55524C",
+        "oklch": "oklch(43.9% 0.010 84.6)",
+        "purpose": "Dark-theme indicating hairline. Same seven usages; does not touch lamps.",
+        "tonalRamp": [
+          "oklch(15% 0.010 84.6)",
+          "oklch(26% 0.010 84.6)",
+          "oklch(37% 0.010 84.6)",
+          "oklch(48% 0.010 84.6)",
+          "oklch(59% 0.010 84.6)",
+          "oklch(70% 0.010 84.6)",
+          "oklch(82% 0.010 84.6)",
+          "oklch(95% 0.010 84.6)"
+        ]
+      },
+      "lamp-ring-dark": {
+        "role": "neutral",
+        "displayName": "Lamp Ring (dark)",
+        "canonical": "#6E6B64",
+        "oklch": "oklch(52.8% 0.011 87.5)",
+        "purpose": "Dark-theme lamp bezel. Measured 3.40:1 against the dark --ground.",
+        "tonalRamp": [
+          "oklch(15% 0.011 87.5)",
+          "oklch(26% 0.011 87.5)",
+          "oklch(37% 0.011 87.5)",
+          "oklch(48% 0.011 87.5)",
+          "oklch(59% 0.011 87.5)",
+          "oklch(70% 0.011 87.5)",
+          "oklch(82% 0.011 87.5)",
+          "oklch(95% 0.011 87.5)"
+        ]
+      },
+      "live-dark": {
+        "role": "primary",
+        "displayName": "Signal Green (dark)",
+        "canonical": "#3FC47E",
+        "oklch": "oklch(73.1% 0.154 156.0)",
+        "purpose": "Dark-theme signal green; text and lamp collapse to one value.",
+        "tonalRamp": [
+          "oklch(15% 0.154 156.0)",
+          "oklch(26% 0.154 156.0)",
+          "oklch(37% 0.154 156.0)",
+          "oklch(48% 0.154 156.0)",
+          "oklch(59% 0.154 156.0)",
+          "oklch(70% 0.154 156.0)",
+          "oklch(82% 0.154 156.0)",
+          "oklch(95% 0.154 156.0)"
+        ]
+      },
+      "live-dot-dark": {
+        "role": "primary",
+        "displayName": "Signal Green Lamp (dark)",
+        "canonical": "#3FC47E",
+        "oklch": "oklch(73.1% 0.154 156.0)",
+        "purpose": "Declared separately but identical to live-dark (#3FC47E).",
+        "tonalRamp": [
+          "oklch(15% 0.154 156.0)",
+          "oklch(26% 0.154 156.0)",
+          "oklch(37% 0.154 156.0)",
+          "oklch(48% 0.154 156.0)",
+          "oklch(59% 0.154 156.0)",
+          "oklch(70% 0.154 156.0)",
+          "oklch(82% 0.154 156.0)",
+          "oklch(95% 0.154 156.0)"
+        ]
+      },
+      "danger-dark": {
+        "role": "tertiary",
+        "displayName": "Fault Red (dark)",
+        "canonical": "#E8836B",
+        "oklch": "oklch(71.5% 0.130 34.3)",
+        "purpose": "Dark-theme fault colour.",
+        "tonalRamp": [
+          "oklch(15% 0.130 34.3)",
+          "oklch(26% 0.130 34.3)",
+          "oklch(37% 0.130 34.3)",
+          "oklch(48% 0.130 34.3)",
+          "oklch(59% 0.130 34.3)",
+          "oklch(70% 0.130 34.3)",
+          "oklch(82% 0.130 34.3)",
+          "oklch(95% 0.130 34.3)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The single hero sentence. Balanced, capped at 54% of the bleed above 940px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Every section head. Balanced, capped at 20ch (26ch in the wide band)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Engagement stage names."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "The lowercase 'systim' mark in the masthead; the footmark is the same at 1.0625rem."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Document default; also the input face at 1rem/1.5."
+      },
+      "prose": {
+        "displayName": "Prose",
+        "purpose": "Paragraphs inside .prose, held to 62ch with 1.15em between paragraphs."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The hero sub-paragraph, held to 58ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Integration panel keys and form field labels. Chivo Mono, uppercase."
+      },
+      "readout": {
+        "displayName": "Readout",
+        "purpose": "Record state lines, mimic reference marks, the deliverable frame label."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Engagement stage reference numbers, tabular."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Footer meta lines and record field names."
+      }
+    },
+    "shadows": [],
+    "shadowPolicy": "None. The stylesheet contains zero box-shadow, text-shadow and drop-shadow declarations. Depth is three tonal ground planes plus a two-weight 1px hairline vocabulary. The single translucent layer is the masthead: color-mix(in srgb, var(--ground) 86%, transparent) with backdrop-filter: saturate(180%) blur(14px), and a solid --ground fallback under @supports not (backdrop-filter: blur(1px)).",
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "The only easing curve in the system (--ease). Every colour and border transition uses it."
+      },
+      {
+        "name": "dur",
+        "value": "240ms",
+        "purpose": "The only transition duration (--dur): link/nav/field/button colour and border changes, and the body's theme cross-fade."
+      },
+      {
+        "name": "dur-skip",
+        "value": "180ms",
+        "purpose": "The skip link's transform reveal — the one duration that is not --dur."
+      },
+      {
+        "name": "mimic-cycle",
+        "value": "7s",
+        "purpose": "The mimic relay's cycle (--cycle). Both the rail sweep and every lamp run on it, linear and infinite."
+      },
+      {
+        "name": "mimic-sweep",
+        "value": "background-position -20% 0 -> 120% 0, 18% rail width, linear infinite",
+        "purpose": "The green sweep riding the rail. Its centre crosses one fifth of the rail every 1.22s."
+      },
+      {
+        "name": "mimic-sweep-y",
+        "value": "background-position 0 -20% -> 0 120%, 18% rail height, linear infinite",
+        "purpose": "The vertical form of the sweep below 740px."
+      },
+      {
+        "name": "mimic-lamp-delays",
+        "value": "0.45s, 1.67s, 2.89s, 4.11s, 5.33s",
+        "purpose": "Per-lamp animation-delay, spaced exactly 1.22s so each lamp fires as the sweep centre reaches its dot."
+      },
+      {
+        "name": "mimic-lamp-keyframes",
+        "value": "0% rest (ground fill / lamp-ring bezel / scale(1)); 2% lit (live-dot fill and ring / scale(1.3)); 9% hold; 22%-100% rest",
+        "purpose": "The lamp is lit for ~7% of the cycle (~0.49s) and dark for the rest."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration: 0.001ms; iteration-count: 1; transition-duration: 0.001ms; rail repainted flat in --rule; lamps pinned at rest with --ground fill, --lamp-ring bezel and transform: none",
+        "purpose": "The sweep halts entirely and the rail reads as a static diagram."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "nav-tight",
+        "value": "max-width: 385px",
+        "purpose": "Nav gap and font size tighten rather than clipping."
+      },
+      {
+        "name": "rail-vertical",
+        "value": "max-width: 739px",
+        "purpose": "The mimic rail rotates to a vertical column at the left."
+      },
+      {
+        "name": "masthead-inline",
+        "value": "760px",
+        "purpose": "Masthead becomes sticky, nav moves inline, panel rows split two-column, touch sizing ends."
+      },
+      {
+        "name": "deliverable-split",
+        "value": "800px",
+        "purpose": "Deliverable rows become title / description."
+      },
+      {
+        "name": "records-three",
+        "value": "840px",
+        "purpose": "The records grid becomes three columns."
+      },
+      {
+        "name": "band-split",
+        "value": "900px",
+        "purpose": "Band grids and engagement stages become multi-column."
+      },
+      {
+        "name": "hero-cap",
+        "value": "940px",
+        "purpose": "The hero line is capped at 54% of the bleed; the contact split opens."
+      }
+    ],
+    "layout": [
+      {
+        "name": "bleed-max",
+        "value": "1360px",
+        "purpose": "The page's one container width."
+      },
+      {
+        "name": "gutter",
+        "value": "clamp(20px, 4.2vw, 72px)",
+        "purpose": "Side padding on every bleed."
+      },
+      {
+        "name": "band-y",
+        "value": "clamp(80px, 10vw, 152px)",
+        "purpose": "Vertical padding on every band."
+      },
+      {
+        "name": "band-arrangement-default",
+        "value": "minmax(0,1fr) minmax(0,1fr) @900px, gap clamp(40px, 6vw, 110px)",
+        "purpose": "Head-left / prose-right. The objection and handover bands."
+      },
+      {
+        "name": "band-arrangement-head",
+        "value": ".band__head margin-bottom clamp(48px, 6vw, 88px)",
+        "purpose": "Full-width head over a ruled list. The engagement stages."
+      },
+      {
+        "name": "band-arrangement-stack",
+        "value": "minmax(0, 62ch) @900px, gap clamp(18px, 2.2vw, 30px)",
+        "purpose": "Head over lead in one narrow column. The integration-surface band."
+      },
+      {
+        "name": "band-arrangement-wide",
+        "value": "minmax(0,1fr) @900px, head max 26ch, lead justify-self:end max 48ch, gap clamp(20px, 2.4vw, 34px)",
+        "purpose": "Head at full measure, lead settled right. The selected-work band."
+      },
+      {
+        "name": "contact-split",
+        "value": "minmax(0,1fr) minmax(0,30rem) @940px, gap clamp(56px, 8vw, 130px)",
+        "purpose": "Intro left, form right."
+      },
+      {
+        "name": "block-lead",
+        "value": "clamp(44px, 5vw, 76px)",
+        "purpose": "The repeated step between a band's head block and its instrument block (mimic, panel, records, deliverable)."
+      }
+    ],
+    "theming": {
+      "default": "light",
+      "lightSelector": ":root",
+      "darkSelectors": [
+        "@media (prefers-color-scheme: dark) :root:not([data-theme=\"light\"])",
+        ":root[data-theme=\"dark\"]"
+      ],
+      "colorScheme": "declared per theme (light / dark)",
+      "flashPrevention": "A blocking script in <head> reads localStorage['systim-theme'] and stamps data-theme on <html> before first paint, inside try/catch so private mode falls through to the media query.",
+      "toggle": "Ships hidden in markup and is revealed by site.js, so a no-JS visitor is never handed a dead control. aria-pressed and aria-label are repainted on every change.",
+      "themeColorMeta": [
+        "#F4F2EE (light)",
+        "#171614 (dark)"
+      ],
+      "transition": "body transitions background-color and color over 240ms cubic-bezier(0.22, 1, 0.36, 1)."
+    },
+    "browserSurfaces": [
+      {
+        "name": "selection",
+        "value": "background: var(--live); color: var(--ground)"
+      },
+      {
+        "name": "caret",
+        "value": "caret-color: var(--live) on inputs and textareas"
+      },
+      {
+        "name": "scrollbar",
+        "value": "scrollbar-color: var(--rule-strong) transparent; scrollbar-width: thin; ::-webkit-scrollbar 11px; thumb var(--rule-strong) with 3px var(--ground) border and 99px radius, var(--ink-mute) on hover; track transparent"
+      },
+      {
+        "name": "focus-ring",
+        "value": "2px solid var(--live), outline-offset 3px, border-radius 2px; :focus:not(:focus-visible) clears it; inputs tighten outline-offset to 1px on focus"
+      },
+      {
+        "name": "underline",
+        "value": "text-decoration-thickness: 1px; text-underline-offset: 0.22em"
+      },
+      {
+        "name": "numerals",
+        "value": "font-variant-numeric: tabular-nums on mimic refs, stage refs, record values and the footer year"
+      }
+    ],
+    "tokenWeighting": {
+      "loadBearing": [
+        "--ground / --ground-sunken / --ground-elev (the three-plane depth system)",
+        "--rule, --rule-strong and --lamp-ring (three greys with three jobs: divide, indicate, bezel a lamp) — the vocabulary that replaces shadow entirely",
+        "--live and --live-dot (the one signal, gated to live state)",
+        "--sans and --mono with the driven wdth axis (94 / 96 / 92 / 100)",
+        "--cycle 7s and the five lamp delays 0.45 / 1.67 / 2.89 / 4.11 / 5.33s (the signature interaction's timing)",
+        "--gutter, --bleed-max and --band-y (the page's one container and its rhythm)",
+        "The four band arrangements: default, head, stack, wide"
+      ],
+      "incidental": [
+        "--danger (used in three places, all inside the contact form)",
+        "--ease and --dur (one curve, one duration; a single value each rather than a scale)",
+        "the 99px scrollbar-thumb radius (browser furniture, not page geometry)",
+        "the 180ms skip-link transform, the one duration outside --dur",
+        "--rail-x: 4px, declared locally on .mimic only below 740px"
+      ],
+      "accessibilityFloors": [
+        "Non-text indicators clear 3:1 against their own ground: --lamp-ring measures 3.29:1 (light) and 3.40:1 (dark). --rule (1.54:1) and --rule-strong (2.42:1) are dividing and indicating lines, not indicators, and are not held to that floor.",
+        "All text pairs clear 4.5:1 in both themes; the tightest is --ink-mute on --ground-sunken at 4.66:1."
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "Submit Button",
+      "kind": "button",
+      "refersTo": "button-submit",
+      "description": "The system's only filled button. Graphite at rest, signal green on hover.",
+      "html": "<button class=\"ds-submit\" type=\"submit\">Send</button>",
+      "css": ".ds-submit { justify-self: start; min-height: 48px; padding: 14px 34px; background: var(--ink, #16150F); color: var(--ground, #F4F2EE); border: 1px solid var(--ink, #16150F); border-radius: 3px; font: 500 0.9375rem/1 var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); letter-spacing: -0.01em; cursor: pointer; transition: background-color 240ms cubic-bezier(0.22,1,0.36,1), border-color 240ms cubic-bezier(0.22,1,0.36,1), color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-submit:hover { background: var(--live, #17724A); border-color: var(--live, #17724A); color: var(--ground, #F4F2EE); } .ds-submit:focus-visible { outline: 2px solid var(--live, #17724A); outline-offset: 3px; border-radius: 2px; } .ds-submit[disabled] { opacity: 0.55; cursor: progress; }"
+    },
+    {
+      "name": "Ruled Link",
+      "kind": "custom",
+      "refersTo": "link-ruled",
+      "description": "The panel's one link vocabulary. A 1px strong-hairline rule under graphite text; both turn signal green on hover.",
+      "html": "<a class=\"ds-ruled\" href=\"#\">Book a conversation</a>",
+      "css": ".ds-ruled { color: var(--ink, #16150F); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); font-weight: 500; font-size: clamp(1rem, 1.1vw, 1.125rem); text-decoration: none; padding-bottom: 3px; border-bottom: 1px solid var(--rule-strong, #A29D92); transition: border-color 240ms cubic-bezier(0.22,1,0.36,1), color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-ruled:hover { color: var(--live, #17724A); border-bottom-color: var(--live, #17724A); } .ds-ruled:focus-visible { outline: 2px solid var(--live, #17724A); outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Monospace uppercase label over a lit-plane field with a strong hairline border. The border darkens to --ink-mute on hover and turns signal green on focus, where the caret already is.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-f\">Work email</label><input id=\"ds-f\" type=\"email\" placeholder=\"\"><p class=\"ds-field-hint\">Roughly what it is, who runs it today, and how often.</p></div>",
+      "css": ".ds-field { display: grid; gap: 7px; } .ds-field label { font: 500 0.75rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-field input { width: 100%; padding: 13px 14px; background: var(--ground-elev, #FBFAF7); border: 1px solid var(--rule-strong, #A29D92); border-radius: 3px; color: var(--ink, #16150F); caret-color: var(--live, #17724A); font: 400 1rem/1.5 var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); transition: border-color 240ms cubic-bezier(0.22,1,0.36,1), background-color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-field input::placeholder { color: var(--ink-mute, #6B6859); } .ds-field input:hover { border-color: var(--ink-mute, #6B6859); } .ds-field input:focus { border-color: var(--live, #17724A); outline: 2px solid var(--live, #17724A); outline-offset: 1px; } .ds-field-hint { margin: 0; font-size: 0.8125rem; color: var(--ink-mute, #6B6859); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-field[data-invalid] input { border-color: var(--danger, #A3341F); }"
+    },
+    {
+      "name": "Masthead Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Lowercase wordmark at driven width 92, reading-ink links at 44px, and one ruled action link. Bounded by a hairline, never a shadow.",
+      "html": "<div class=\"ds-masthead\"><a class=\"ds-wordmark\" href=\"#\">systim</a><nav class=\"ds-nav\"><a href=\"#\">Engagement</a><a href=\"#\">Integrations</a><a href=\"#\">Handover</a><a class=\"ds-nav-act\" href=\"#\">Start</a></nav></div>",
+      "css": ".ds-masthead { display: flex; align-items: center; gap: 0 clamp(16px, 3vw, 40px); min-height: 68px; border-bottom: 1px solid var(--rule, #C9C5BC); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-wordmark { font-size: 1.1875rem; font-weight: 600; letter-spacing: -0.035em; font-variation-settings: 'wdth' 92; color: var(--ink, #16150F); text-decoration: none; margin-right: auto; } .ds-nav { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); } .ds-nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.9375rem; color: var(--ink-body, #46443C); text-decoration: none; transition: color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-nav a:hover { color: var(--ink, #16150F); } .ds-nav-act { color: var(--ink, #16150F) !important; font-weight: 500; padding-bottom: 2px; border-bottom: 1px solid var(--rule-strong, #A29D92); transition: border-color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-nav-act:hover { border-bottom-color: var(--live, #17724A); } .ds-nav a:focus-visible { outline: 2px solid var(--live, #17724A); outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Theme Toggle",
+      "kind": "button",
+      "refersTo": "theme-toggle",
+      "description": "A 40px hairline circle carrying an 18px stroked sun glyph (moon in dark). Ships hidden in markup and revealed by script.",
+      "html": "<button class=\"ds-theme\" type=\"button\" aria-pressed=\"false\" aria-label=\"Switch to dark panel\"><svg class=\"ds-theme-icon\" viewBox=\"0 0 20 20\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"10\" cy=\"10\" r=\"4\"/><g><path d=\"M10 1.5v2M10 16.5v2M18.5 10h-2M3.5 10h-2M16 4l-1.4 1.4M5.4 14.6L4 16M16 16l-1.4-1.4M5.4 5.4L4 4\"/></g></svg></button>",
+      "css": ".ds-theme { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; background: none; border: 1px solid var(--rule, #C9C5BC); border-radius: 50%; color: var(--ink-body, #46443C); cursor: pointer; transition: border-color 240ms cubic-bezier(0.22,1,0.36,1), color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-theme:hover { border-color: var(--rule-strong, #A29D92); color: var(--ink, #16150F); } .ds-theme:focus-visible { outline: 2px solid var(--live, #17724A); outline-offset: 3px; } .ds-theme-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; } @media (pointer: coarse) { .ds-theme { width: 44px; height: 44px; } }"
+    },
+    {
+      "name": "Mimic Relay",
+      "kind": "custom",
+      "refersTo": "mimic-lamp",
+      "description": "The signature interaction. An 18%-wide signal-green sweep rides a 1px hairline rail from -20% to 120% over a 7s linear cycle; five lamps — 11px circles bezelled in --lamp-ring — fire at 0.45/1.67/2.89/4.11/5.33s, exactly 1.22s apart, as the sweep centre reaches each dot. The page's only self-starting motion; it halts entirely under reduced motion.",
+      "html": "<ol class=\"ds-mimic\" aria-label=\"How an engagement runs\"><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">1</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Map</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">2</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Build</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">3</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Integrate</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">4</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Prove</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">5</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Hand over</a></li></ol>",
+      "css": ".ds-mimic { --dot: 11px; --rail-y: 30px; --cycle: 7s; position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-mimic::before { content: ''; position: absolute; left: 0; right: 0; top: calc(var(--rail-y) + (var(--dot) - 1px) / 2); height: 1px; background-image: linear-gradient(90deg, transparent 0%, var(--live, #17724A) 50%, transparent 100%), linear-gradient(var(--rule, #C9C5BC), var(--rule, #C9C5BC)); background-size: 18% 100%, 100% 100%; background-repeat: no-repeat; background-position: -20% 0, 0 0; animation: ds-mimic-sweep var(--cycle) linear infinite; } @keyframes ds-mimic-sweep { to { background-position: 120% 0, 0 0; } } .ds-mimic-stage { position: relative; padding-right: 16px; padding-top: var(--rail-y); } .ds-mimic-ref { position: absolute; top: 0; left: 0; font: 500 0.6875rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; color: var(--ink-mute, #6B6859); } .ds-mimic-dot { display: block; width: var(--dot); height: var(--dot); border-radius: 50%; background: var(--ground, #F4F2EE); border: 1.5px solid var(--lamp-ring, #8A857A); position: relative; z-index: 1; animation: ds-mimic-lamp var(--cycle) linear infinite; } .ds-mimic-stage:nth-child(1) .ds-mimic-dot { animation-delay: 0.45s; } .ds-mimic-stage:nth-child(2) .ds-mimic-dot { animation-delay: 1.67s; } .ds-mimic-stage:nth-child(3) .ds-mimic-dot { animation-delay: 2.89s; } .ds-mimic-stage:nth-child(4) .ds-mimic-dot { animation-delay: 4.11s; } .ds-mimic-stage:nth-child(5) .ds-mimic-dot { animation-delay: 5.33s; } @keyframes ds-mimic-lamp { 0% { background: var(--ground, #F4F2EE); border-color: var(--lamp-ring, #8A857A); transform: scale(1); } 2% { background: var(--live-dot, #1B8A57); border-color: var(--live-dot, #1B8A57); transform: scale(1.3); } 9% { background: var(--live-dot, #1B8A57); border-color: var(--live-dot, #1B8A57); transform: scale(1.3); } 22%, 100% { background: var(--ground, #F4F2EE); border-color: var(--lamp-ring, #8A857A); transform: scale(1); } } .ds-mimic-label { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; font-size: clamp(0.9375rem, 1.35vw, 1.1875rem); font-weight: 500; letter-spacing: -0.02em; color: var(--ink, #16150F); text-decoration: none; transition: color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-mimic-label:hover { color: var(--live, #17724A); } .ds-mimic-label:focus-visible { outline: 2px solid var(--live, #17724A); outline-offset: 3px; border-radius: 2px; } @media (prefers-reduced-motion: reduce) { .ds-mimic::before { background-image: linear-gradient(var(--rule, #C9C5BC), var(--rule, #C9C5BC)); background-size: 100% 100%; background-position: 0 0; animation: none; } .ds-mimic-dot { animation: none; background: var(--ground, #F4F2EE); border-color: var(--lamp-ring, #8A857A); transform: none; } }"
+    },
+    {
+      "name": "Engagement Stage Row",
+      "kind": "custom",
+      "refersTo": "card-record",
+      "description": "A hairline-ruled row: monospace tabular reference numeral, stage name, body held to 58ch, and an optional note behind a strong-hairline left rule.",
+      "html": "<ol class=\"ds-stages\"><li class=\"ds-stage\"><p class=\"ds-stage-ref\">1</p><h3 class=\"ds-stage-name\">Map</h3><div class=\"ds-stage-body\"><p>Two weeks inside the operation. We follow one process end to end, timestamp every handoff, and come back with two things: the map, and the number.</p><p class=\"ds-stage-note\">Fixed fee. You keep the map whether or not you continue.</p></div></li></ol>",
+      "css": ".ds-stages { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); color: var(--ink-body, #46443C); } .ds-stage { display: grid; grid-template-columns: 3.5rem minmax(0, 13rem) minmax(0, 1fr); gap: clamp(24px, 4vw, 72px); align-items: start; padding-block: clamp(30px, 3.6vw, 46px); border-top: 1px solid var(--rule, #C9C5BC); } .ds-stage:last-child { border-bottom: 1px solid var(--rule, #C9C5BC); } .ds-stage-ref { margin: 0; font: 500 0.75rem/1.6 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; color: var(--ink-mute, #6B6859); } .ds-stage-name { margin: 0; font-size: clamp(1.25rem, 1.9vw, 1.6rem); font-weight: 500; line-height: 1.2; letter-spacing: -0.026em; color: var(--ink, #16150F); } .ds-stage-body { max-width: 58ch; } .ds-stage-body p { margin: 0; line-height: 1.66; } .ds-stage-note { margin-top: 14px !important; padding-left: 14px; border-left: 1px solid var(--rule-strong, #A29D92); font-size: 0.9375rem; color: var(--ink-mute, #6B6859); } @media (max-width: 899px) { .ds-stage { grid-template-columns: minmax(0, 1fr); gap: 10px; } }"
+    },
+    {
+      "name": "Record Card (awaiting data)",
+      "kind": "card",
+      "refersTo": "card-record",
+      "description": "An honest empty proof slot. The lamp is a hollow --lamp-ring ring at 3.29:1 because the channel has no data; fields carry em dashes in tabular figures.",
+      "html": "<ul class=\"ds-records\"><li class=\"ds-record\" data-state=\"awaiting\"><div class=\"ds-record-head\"><h3 class=\"ds-record-title\">Client name</h3><p class=\"ds-record-state\"><span class=\"ds-record-lamp\" aria-hidden=\"true\"></span>Awaiting data</p></div><dl class=\"ds-record-fields\"><div><dt>Sector</dt><dd>&mdash;</dd></div><div><dt>Process</dt><dd>&mdash;</dd></div><div><dt>Before</dt><dd>&mdash;</dd></div><div><dt>After</dt><dd>&mdash;</dd></div></dl></li></ul>",
+      "css": ".ds-records { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin: 0; padding: 0; list-style: none; background: var(--rule, #C9C5BC); border-block: 1px solid var(--rule, #C9C5BC); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-record { background: var(--ground, #F4F2EE); padding: clamp(24px, 2.6vw, 34px) clamp(20px, 2.2vw, 30px); } .ds-record-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; } .ds-record-title { margin: 0; font-size: 1.125rem; font-weight: 500; letter-spacing: -0.022em; color: var(--ink-mute, #6B6859); } .ds-record-state { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin: 0; font: 500 0.6875rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-record-lamp { width: 7px; height: 7px; border-radius: 50%; background: none; border: 1px solid var(--lamp-ring, #8A857A); } .ds-record-fields { display: grid; gap: 12px; margin: 0; } .ds-record-fields > div { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 16px; align-items: baseline; } .ds-record-fields dt { font: 400 0.75rem/1.5 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.06em; color: var(--ink-mute, #6B6859); } .ds-record-fields dd { margin: 0; color: var(--ink-mute, #6B6859); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Deliverable Frame",
+      "kind": "card",
+      "refersTo": "frame-deliverable",
+      "description": "The one elevated container: a square lit-plane box behind a 1px hairline, opened by a monospace uppercase label bar, with rows divided by hairlines.",
+      "html": "<div class=\"ds-deliverable\"><p class=\"ds-deliverable-label\">Handover package</p><ol class=\"ds-deliverable-list\"><li><span class=\"ds-deliverable-t\">Runbook</span><span class=\"ds-deliverable-d\">How it works, how it fails, and what to do about each failure.</span></li><li><span class=\"ds-deliverable-t\">Test suite</span><span class=\"ds-deliverable-d\">Runs in your CI, owned by you, failing loudly when an upstream system changes.</span></li></ol></div>",
+      "css": ".ds-deliverable { border: 1px solid var(--rule, #C9C5BC); background: var(--ground-elev, #FBFAF7); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-deliverable-label { margin: 0; padding: 16px clamp(20px, 2.4vw, 34px); border-bottom: 1px solid var(--rule, #C9C5BC); font: 500 0.6875rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-deliverable-list { margin: 0; padding: 0; list-style: none; } .ds-deliverable-list > li { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: baseline; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.4vw, 34px); border-bottom: 1px solid var(--rule, #C9C5BC); } .ds-deliverable-list > li:last-child { border-bottom: none; } .ds-deliverable-t { font-size: 1.0625rem; font-weight: 500; letter-spacing: -0.02em; color: var(--ink, #16150F); } .ds-deliverable-d { color: var(--ink-body, #46443C); max-width: 54ch; } @media (max-width: 799px) { .ds-deliverable-list > li { grid-template-columns: minmax(0, 1fr); gap: 6px 18px; } }"
+    },
+    {
+      "name": "Integration Panel Row",
+      "kind": "custom",
+      "refersTo": "frame-deliverable",
+      "description": "A hairline-ruled key/value row: a monospace uppercase key at 11rem, and graphite values wrapping in a flex list.",
+      "html": "<dl class=\"ds-panel\"><div class=\"ds-panel-row\"><dt class=\"ds-panel-key\">Records</dt><dd class=\"ds-panel-val\"><span>Salesforce</span><span>HubSpot</span><span>NetSuite</span><span>Dynamics</span><span>Pipedrive</span></dd></div><div class=\"ds-panel-row\"><dt class=\"ds-panel-key\">Data</dt><dd class=\"ds-panel-val\"><span>Postgres</span><span>Snowflake</span><span>BigQuery</span><span>Databricks</span><span>S3</span></dd></div></dl>",
+      "css": ".ds-panel { margin: 0; font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-panel-row { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: baseline; padding-block: clamp(20px, 2.2vw, 28px); border-top: 1px solid var(--rule, #C9C5BC); } .ds-panel-row:last-child { border-bottom: 1px solid var(--rule, #C9C5BC); } .ds-panel-key { font: 500 0.75rem/1.6 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-panel-val { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; } .ds-panel-val span { font-size: clamp(0.9375rem, 1.2vw, 1.0625rem); color: var(--ink, #16150F); letter-spacing: -0.012em; } @media (max-width: 759px) { .ds-panel-row { grid-template-columns: minmax(0, 1fr); gap: 10px; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Control Room",
+    "overview": "This is a process-control mimic panel rendered as a webpage. Every structural line on the page is a 1px hairline the colour of a printed schematic rule; every numeral, key and state readout is set in monospace because it is a measurement, not a decoration; and a single signal green appears only where a system is reporting live. The page reads like the wall of a plant control room at rest: warm, flat, precisely ruled, and mostly empty — with one lamp line that keeps running whether or not anyone is watching.\n\nThe palette is warm, not clinical. The ground is a paper-white with a yellow cast (#F4F2EE), not a screen white; the ink is a warm graphite (#16150F), not black. Depth is achieved entirely by three tonal ground planes and a hairline vocabulary. Density is low at the top of the page and rises as the visitor descends: the hero holds one sentence across roughly half the bleed and leaves the rest empty, while the engagement stages, integration panel and handover frame compress into tight ruled rows. That gradient — spacious to instrumented — is the page's argument, and it should be preserved on any second surface.\n\nWhat this world refuses is as load-bearing as what it uses. There is no box-shadow anywhere in the stylesheet; there are no filled buttons other than the single submit control; there are no icons other than the theme toggle's own sun/moon glyph; there is no decorative colour. Green never appears as branding, only as state. Both themes are first-class: light is the declared default ground because the buyer reads on a desktop mid-workday, and dark is offered rather than assumed.",
+    "keyCharacteristics": [
+      "Three ground planes only — sunken, default, elevated — and no fourth",
+      "Elevation declared once, as a 1px hairline; zero box-shadow in the entire stylesheet",
+      "Three greys with three jobs: rule divides, rule-strong indicates, lamp-ring bezels a lamp",
+      "Archivo with its wdth axis actually driven (94 / 96 / 92) for voice; Chivo Mono strictly for measurement",
+      "One signal green, permitted only where a system reports live",
+      "One self-starting motion moment on the page — the mimic sweep — and nothing else",
+      "Browser chrome (selection, caret, scrollbar, focus ring) themed from the same palette"
+    ],
+    "rules": [
+      {
+        "name": "The Live-Only Rule",
+        "section": "colors",
+        "body": "Green is a report, not a brand colour. It is permitted only where something is genuinely reporting live: a lamp the sweep has just reached, a control the visitor is currently focused on or hovering, a caret in a field they are typing into, a status that actually succeeded. It never fills a heading, a divider, a background, or a resting button."
+      },
+      {
+        "name": "The Three-Grey Rule",
+        "section": "colors",
+        "body": "Each grey has exactly one job. rule divides — band tops, row rules, frame borders. rule-strong indicates — a link's underline, a field's resting border, a note's left rule. lamp-ring bezels an unlit lamp, and nothing else. Do not borrow one for another's work, and do not introduce a fourth."
+      },
+      {
+        "name": "The Unlit Lamp Rule",
+        "section": "colors",
+        "body": "A lamp with no data behind it is a hollow ring in lamp-ring, never a grey fill and never a green one, and never a hairline grey borrowed from elsewhere. The ring must clear 3:1 against its ground because it is a non-text indicator; lamp-ring is the token that guarantees it. The three record lamps are unlit on purpose because those channels are awaiting real client data; lighting them would be the page claiming proof it does not have."
+      },
+      {
+        "name": "The Measurement-Only Rule",
+        "section": "typography",
+        "body": "Chivo Mono is permitted for numerals, reference marks, keys, state labels, field names, and the footer meta line. It is never used for a heading, a sentence, a button, a link in running text, or anything chosen for texture. If it is not being read as a value, it is Archivo."
+      },
+      {
+        "name": "The Driven-Width Rule",
+        "section": "typography",
+        "body": "Display type narrows. The wdth axis is a structural part of the voice, not a nicety: 94 on the hero line, 96 on section heads, 92 on the wordmark and footmark, 100 on everything else. A new heading that ships at default width will look foreign even at the correct size and weight."
+      },
+      {
+        "name": "The Measure Rule",
+        "section": "typography",
+        "body": "Text is always capped: 62ch for prose, 58ch for the hero lead and stage bodies, 54ch for deliverable descriptions, 48ch for the lead in a wide band, 26ch or 20ch for heads. Nothing on this page runs the full bleed as text."
+      },
+      {
+        "name": "The Hairline-Not-Gap Rule",
+        "section": "layout",
+        "body": "Sections are separated by a 1px rule border, not by extra whitespace or a coloured band. The only tonal band break in the system is the single sunken plane."
+      },
+      {
+        "name": "The Empty-Right Rule",
+        "section": "layout",
+        "body": "The hero sentence stops at 54% of the bleed above 940px. The remaining space is not available for a graphic, a form, a stat block or a screenshot. The emptiness is the claim."
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "section": "elevation",
+        "body": "Zero box-shadow in the stylesheet. If something must separate from its surroundings, it gets a 1px hairline or a tonal plane change. A shadow anywhere on a future surface breaks the world, not just the page."
+      },
+      {
+        "name": "The Three-Plane Rule",
+        "section": "elevation",
+        "body": "Sunken, default, elevated. Exactly three. Sunken is for a band that recedes; elevated is for a surface you reach into. Do not add a fourth tone to signal a fourth level of importance."
+      },
+      {
+        "name": "The Square-Container Rule",
+        "section": "shapes",
+        "body": "Containers are square. Radius is reserved for controls (3px) and lamps (50%). A rounded card in this world reads as borrowed from a different one."
+      }
+    ],
+    "dos": [
+      "Do declare elevation with a 1px hairline or a tonal plane change. rule divides, rule-strong indicates, lamp-ring bezels a lamp.",
+      "Do drive Archivo's width axis on display type — 94 on a hero line, 96 on a section head, 92 on a mark. Default width reads as a foreign typeface here.",
+      "Do reserve Chivo Mono for numerals, keys, reference marks, state labels and field names — things being read as values.",
+      "Do cap every text block: 62ch prose, 58ch leads and stage bodies, 54ch deliverable descriptions, 48ch wide-band leads, 20–26ch heads.",
+      "Do choose one of the four established band arrangements when adding a section rather than inventing a fifth.",
+      "Do use the repeated clamp(44px, 5vw, 76px) step between a band's head block and its instrument block.",
+      "Do theme browser surfaces from the palette — selection, caret, scrollbar, focus ring — on any new surface.",
+      "Do keep every new colour value in both themes; the dark form is not an afterthought.",
+      "Do halt any motion entirely under prefers-reduced-motion and render the affected element in its resting state, as the mimic rail does.",
+      "Do grow standalone controls to 44px below 760px or on a coarse pointer.",
+      "Do hold any new non-text indicator to 3:1 against its own ground, and give it its own token rather than reusing a hairline grey — that is why lamp-ring exists.",
+      "Do make every declared hover state an actual change. A hover rule that restates the resting value is not a state."
+    ],
+    "donts": [
+      "Don't add a box-shadow anywhere. The stylesheet has zero, and that is the rule.",
+      "Don't add a fourth ground plane. Sunken, default, elevated — three.",
+      "Don't use green as decoration, branding, a fill, or a heading colour. It reports live state only.",
+      "Don't light a lamp for a channel that has no data. Unlit is a hollow lamp-ring ring, and it is honest.",
+      "Don't add a second self-starting animation. The mimic sweep is the page's only unbidden motion; everything else responds to the visitor.",
+      "Don't round a container. Radius belongs to controls (3px) and lamps (50%).",
+      "Don't introduce a second filled button. Secondary actions are ruled links.",
+      "Don't set body copy, headings, buttons or in-sentence links in Chivo Mono.",
+      "Don't fill the empty right side of the hero. The stop at 54% is the composition.",
+      "Don't add a gradient. The only one in the system is the mimic sweep itself, and it is a moving light, not a surface.",
+      "Don't use rule-strong on a lamp or lamp-ring on a rule. The three greys are not interchangeable."
+    ]
+  }
+}

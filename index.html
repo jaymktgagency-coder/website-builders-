@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>systim — AI integration and automation</title>
+<meta name="description" content="systim builds the automation your systems are missing, integrates it into the tools your team already opens, and hands it back running.">
+<meta name="theme-color" content="#F4F2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="systim — AI integration and automation">
+<meta property="og:description" content="We build the automation your systems are missing, then hand it back running.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='.5' y='.5' width='31' height='31' fill='%23F4F2EE' stroke='%23C9C5BC'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2317724A'/%3E%3C/svg%3E">
+<script>
+/* Set the ground before first paint so the panel never flashes the wrong theme. */
+(function () {
+  try {
+    var stored = localStorage.getItem('systim-theme');
+    if (stored === 'light' || stored === 'dark') {
+      document.documentElement.setAttribute('data-theme', stored);
+    }
+  } catch (e) { /* private mode: fall through to the media query */ }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Chivo+Mono:wght@200..700&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="bleed masthead__inner">
+    <a class="wordmark" href="#top" aria-label="systim, home">systim</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#engagement">Engagement</a>
+      <a href="#surface">Integrations</a>
+      <a href="#handover">Handover</a>
+      <a class="nav__act" href="#contact">Start</a>
+    </nav>
+    <button class="theme" type="button" aria-pressed="false" aria-label="Switch to dark panel" data-theme-toggle hidden>
+      <svg class="theme__icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <circle class="theme__sun" cx="10" cy="10" r="4"/>
+        <g class="theme__rays">
+          <path d="M10 1.5v2M10 16.5v2M18.5 10h-2M3.5 10h-2M16 4l-1.4 1.4M5.4 14.6L4 16M16 16l-1.4-1.4M5.4 5.4L4 4"/>
+        </g>
+        <path class="theme__moon" d="M14.5 11.5A5.5 5.5 0 0 1 8.5 5.5a5.5 5.5 0 1 0 6 6z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="bleed">
+      <h1 class="hero__line">
+        We build your automation, then hand it back running.
+      </h1>
+      <p class="hero__act">
+        <a class="ruled" href="#contact">Book a conversation</a>
+      </p>
+      <div class="hero__foot">
+        <p class="hero__sub">
+          An integration-first consultancy. We build the automation your systems
+          are missing: the CRM three teams edit by hand, the export that only runs
+          on Tuesdays, the approval living in someone&rsquo;s inbox. And we leave your
+          team owning what we built.
+        </p>
+      </div>
+    </div>
+
+    <!-- Mimic line: the engagement as a process line that does not stop. -->
+    <div class="bleed">
+      <ol class="mimic" aria-label="How an engagement runs">
+        <li class="mimic__stage">
+          <span class="mimic__ref">1</span>
+          <span class="mimic__dot" aria-hidden="true"></span>
+          <a class="mimic__label" href="#stage-1">Map</a>
+        </li>
+        <li class="mimic__stage">
+          <span class="mimic__ref">2</span>
+          <span class="mimic__dot" aria-hidden="true"></span>
+          <a class="mimic__label" href="#stage-2">Build</a>
+        </li>
+        <li class="mimic__stage">
+          <span class="mimic__ref">3</span>
+          <span class="mimic__dot" aria-hidden="true"></span>
+          <a class="mimic__label" href="#stage-3">Integrate</a>
+        </li>
+        <li class="mimic__stage">
+          <span class="mimic__ref">4</span>
+          <span class="mimic__dot" aria-hidden="true"></span>
+          <a class="mimic__label" href="#stage-4">Prove</a>
+        </li>
+        <li class="mimic__stage">
+          <span class="mimic__ref">5</span>
+          <span class="mimic__dot" aria-hidden="true"></span>
+          <a class="mimic__label" href="#stage-5">Hand over</a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── The objection ────────────────────────────────────────────────── -->
+  <section class="band">
+    <div class="bleed band__grid">
+      <h2 class="h2">Most automation stalls at the integration.</h2>
+      <div class="prose">
+        <p>
+          The pilot works. The demo is convincing. Then it meets production: the
+          record that four systems disagree about, the file that arrives by SFTP at
+          02:00, the step a person has to approve because a regulator says so. And
+          it stops.
+        </p>
+        <p>
+          The model was never the hard part. The hard part is everything the model
+          has to talk to, and the fact that all of it is already carrying your
+          business. That is the work we do, and it is where we start.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Engagement stages ────────────────────────────────────────────── -->
+  <section class="band band--ruled" id="engagement">
+    <div class="bleed">
+      <h2 class="h2 band__head">How an engagement runs.</h2>
+      <ol class="stages">
+        <li class="stage" id="stage-1">
+          <p class="stage__ref">1</p>
+          <h3 class="stage__name">Map</h3>
+          <div class="stage__body">
+            <p>
+              Two weeks inside the operation. We follow one process end to end,
+              timestamp every handoff, and come back with two things: the map, and
+              the number. What it costs you to run this today, and which part of it
+              is worth automating first.
+            </p>
+            <p class="stage__note">Fixed fee. You keep the map whether or not you continue.</p>
+          </div>
+        </li>
+        <li class="stage" id="stage-2">
+          <p class="stage__ref">2</p>
+          <h3 class="stage__name">Build</h3>
+          <div class="stage__body">
+            <p>
+              We build against your data, not a demo set. Model choice is an
+              engineering decision, not a brand one. Most steps in a real process
+              need retrieval, a schema and a rule; the two that genuinely need a
+              frontier model get one.
+            </p>
+          </div>
+        </li>
+        <li class="stage" id="stage-3">
+          <p class="stage__ref">3</p>
+          <h3 class="stage__name">Integrate</h3>
+          <div class="stage__body">
+            <p>
+              The output lands where the work already happens. No second dashboard
+              to remember, no parallel process to reconcile at month end. If your
+              team has to change tools to get the benefit, we have not finished.
+            </p>
+          </div>
+        </li>
+        <li class="stage" id="stage-4">
+          <p class="stage__ref">4</p>
+          <h3 class="stage__name">Prove</h3>
+          <div class="stage__body">
+            <p>
+              It runs beside your existing process until the two agree. Every
+              disagreement is logged and reviewed with your team, so you are reading
+              a real error rate on your own data before anything is switched over.
+            </p>
+            <p class="stage__note">You decide when it takes over. Not us.</p>
+          </div>
+        </li>
+        <li class="stage" id="stage-5">
+          <p class="stage__ref">5</p>
+          <h3 class="stage__name">Hand over</h3>
+          <div class="stage__body">
+            <p>
+              Your team gets the runbook, the test suite, the access map and a week
+              of pairing. Then we leave. If you bring us back, it is because you
+              chose to, not because we are the only ones who understand it.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── Integration surface ──────────────────────────────────────────── -->
+  <section class="band band--sunken" id="surface">
+    <div class="bleed band__grid band__grid--stack">
+      <h2 class="h2">What we integrate with.</h2>
+      <div class="prose">
+        <p>
+          These are the systems the work usually has to reach. Integration is built
+          against each vendor&rsquo;s public API, the same way your own engineers would
+          do it. Most engagements also include at least one system that exists only
+          inside your company.
+        </p>
+      </div>
+    </div>
+    <div class="bleed">
+      <dl class="panel">
+        <div class="panel__row">
+          <dt class="panel__key">Records</dt>
+          <dd class="panel__val"><span>Salesforce</span><span>HubSpot</span><span>NetSuite</span><span>Dynamics</span><span>Pipedrive</span></dd>
+        </div>
+        <div class="panel__row">
+          <dt class="panel__key">Data</dt>
+          <dd class="panel__val"><span>Postgres</span><span>Snowflake</span><span>BigQuery</span><span>Databricks</span><span>S3</span></dd>
+        </div>
+        <div class="panel__row">
+          <dt class="panel__key">Work</dt>
+          <dd class="panel__val"><span>Slack</span><span>Teams</span><span>Jira</span><span>Linear</span><span>Zendesk</span><span>Intercom</span></dd>
+        </div>
+        <div class="panel__row">
+          <dt class="panel__key">Documents</dt>
+          <dd class="panel__val"><span>Google Workspace</span><span>SharePoint</span><span>Box</span><span>DocuSign</span></dd>
+        </div>
+        <div class="panel__row">
+          <dt class="panel__key">Anything else</dt>
+          <dd class="panel__val"><span>REST</span><span>GraphQL</span><span>SFTP</span><span>Webhooks</span><span>The internal tool nobody has documented since 2019</span></dd>
+        </div>
+      </dl>
+      <p class="panel__note">
+        Product names above are the trademarks of their respective owners. systim is
+        not affiliated with, endorsed by, or a certified partner of any of them.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Proof: channels awaiting data ────────────────────────────────── -->
+  <section class="band band--ruled" id="work">
+    <div class="bleed band__grid band__grid--wide">
+      <h2 class="h2">Selected work.</h2>
+      <div class="prose">
+        <p>
+          Three engagement records will be published here, with the client&rsquo;s
+          permission and their own numbers. Nothing here will be modelled or
+          estimated.
+        </p>
+      </div>
+    </div>
+    <div class="bleed">
+      <ul class="records">
+        <li class="record" data-state="awaiting">
+          <div class="record__head">
+            <h3 class="record__title">Client name</h3>
+            <p class="record__state"><span class="record__lamp" aria-hidden="true"></span>Awaiting data</p>
+          </div>
+          <dl class="record__fields">
+            <div><dt>Sector</dt><dd>—</dd></div>
+            <div><dt>Process</dt><dd>—</dd></div>
+            <div><dt>Before</dt><dd>—</dd></div>
+            <div><dt>After</dt><dd>—</dd></div>
+          </dl>
+        </li>
+        <li class="record" data-state="awaiting">
+          <div class="record__head">
+            <h3 class="record__title">Client name</h3>
+            <p class="record__state"><span class="record__lamp" aria-hidden="true"></span>Awaiting data</p>
+          </div>
+          <dl class="record__fields">
+            <div><dt>Sector</dt><dd>—</dd></div>
+            <div><dt>Process</dt><dd>—</dd></div>
+            <div><dt>Before</dt><dd>—</dd></div>
+            <div><dt>After</dt><dd>—</dd></div>
+          </dl>
+        </li>
+        <li class="record" data-state="awaiting">
+          <div class="record__head">
+            <h3 class="record__title">Client name</h3>
+            <p class="record__state"><span class="record__lamp" aria-hidden="true"></span>Awaiting data</p>
+          </div>
+          <dl class="record__fields">
+            <div><dt>Sector</dt><dd>—</dd></div>
+            <div><dt>Process</dt><dd>—</dd></div>
+            <div><dt>Before</dt><dd>—</dd></div>
+            <div><dt>After</dt><dd>—</dd></div>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Handover: the artifact, previewed before the ask ─────────────── -->
+  <section class="band" id="handover">
+    <div class="bleed band__grid">
+      <h2 class="h2">What you own at the end.</h2>
+      <div class="prose">
+        <p>
+          The deliverable is not a dependency on us. Every engagement closes with the
+          same package, and your team is walked through all of it before we stop
+          invoicing.
+        </p>
+      </div>
+    </div>
+    <div class="bleed">
+      <div class="deliverable">
+        <p class="deliverable__label">Handover package</p>
+        <ol class="deliverable__list">
+          <li><span class="deliverable__t">Runbook</span><span class="deliverable__d">How it works, how it fails, and what to do about each failure.</span></li>
+          <li><span class="deliverable__t">Architecture record</span><span class="deliverable__d">Every decision we made and the reason, so the next engineer can disagree with it properly.</span></li>
+          <li><span class="deliverable__t">Test suite</span><span class="deliverable__d">Runs in your CI, owned by you, failing loudly when an upstream system changes.</span></li>
+          <li><span class="deliverable__t">Access map</span><span class="deliverable__d">Every credential, scope and service account, with the revoke procedure for ours.</span></li>
+          <li><span class="deliverable__t">Cost model</span><span class="deliverable__d">What it costs to run per month, per unit of work, and what makes that number move.</span></li>
+          <li><span class="deliverable__t">Five days of pairing</span><span class="deliverable__d">With the people who will operate it, after it is live.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ──────────────────────────────────────────────────────── -->
+  <section class="band band--ruled" id="contact">
+    <div class="bleed contact">
+      <div class="contact__intro">
+        <h2 class="h2">Tell us which process is costing you the most.</h2>
+        <p class="prose">
+          You will get a reply from the person who would run the engagement, not a
+          scheduling link. If it is not something we should take on, we will say so
+          and point you somewhere better.
+        </p>
+        <p class="contact__alt">
+          Or write directly:
+          <a class="ruled" href="mailto:jaymktgagency@gmail.com">jaymktgagency@gmail.com</a>
+        </p>
+      </div>
+
+      <form class="form" method="post" action="https://formsubmit.co/ajax/jaymktgagency@gmail.com" novalidate data-form>
+        <input type="hidden" name="_subject" value="New enquiry from the systim site">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
+
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+          <p class="field__err" data-err-for="f-name" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-company">Company</label>
+          <input id="f-company" name="company" type="text" autocomplete="organization" required>
+          <p class="field__err" data-err-for="f-company" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-email">Work email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+          <p class="field__err" data-err-for="f-email" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-process">The process</label>
+          <textarea id="f-process" name="process" rows="4" required></textarea>
+          <p class="field__hint">Roughly what it is, who runs it today, and how often.</p>
+          <p class="field__err" data-err-for="f-process" hidden></p>
+        </div>
+        <button class="submit" type="submit">
+          <span data-submit-label>Send</span>
+        </button>
+        <p class="form__status" role="status" data-form-status></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="bleed foot__inner">
+    <nav class="foot__nav" aria-label="Footer">
+      <a href="#engagement">Engagement</a>
+      <a href="#surface">Integrations</a>
+      <a href="#work">Selected work</a>
+      <a href="#handover">Handover</a>
+      <a href="#contact">Start a conversation</a>
+    </nav>
+    <p class="foot__mark">systim</p>
+    <p class="foot__meta">AI integration &amp; automation consulting</p>
+    <p class="foot__meta foot__year">&copy; <span data-year>2026</span></p>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
