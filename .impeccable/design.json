@@ -10,7 +10,7 @@
     ],
     "direction": "The Control Room",
     "seedKey": "57393fa3",
-    "note": "Every value recorded here was read out of assets/css/site.css as shipped. Light is the default ground; dark values carry the -dark suffix."
+    "note": "Every value recorded here was read out of assets/css/site.css as shipped. Light is the default ground; dark values carry the -dark suffix. Re-read after the post-documentation repair round, which removed the orphan .mimic__pulse span, introduced --lamp-ring as a distinct role from --rule-strong, and made .field input:hover an actual state (--rule-strong -> --ink-mute). Mimic timing was not touched."
   },
   "extensions": {
     "colorMeta": {
@@ -138,7 +138,7 @@
         "displayName": "Strong Hairline",
         "canonical": "#A29D92",
         "oklch": "oklch(69.7% 0.017 86.4)",
-        "purpose": "Lines that indicate rather than divide: link rules, field borders, unlit lamp rings.",
+        "purpose": "Lines that indicate rather than divide: ruled-link and nav-action underlines, the theme toggle's hover border, the stage note's left rule, input resting borders, and the scrollbar (scrollbar-color and the webkit thumb). It does not touch lamps.",
         "tonalRamp": [
           "oklch(15% 0.017 86.4)",
           "oklch(26% 0.017 86.4)",
@@ -148,6 +148,23 @@
           "oklch(70% 0.017 86.4)",
           "oklch(82% 0.017 86.4)",
           "oklch(95% 0.017 86.4)"
+        ]
+      },
+      "lamp-ring": {
+        "role": "neutral",
+        "displayName": "Lamp Ring",
+        "canonical": "#8A857A",
+        "oklch": "oklch(61.8% 0.017 86.5)",
+        "purpose": "The bezel of an unlit lamp, and nothing else. Five usages, all lamp-related: the mimic dot's 1.5px border, the 0% and 22%/100% keyframe stops, the reduced-motion lamp override, and the 1px record lamp ring. Measured 3.29:1 against --ground, clearing WCAG 1.4.11's 3:1 floor for a non-text indicator.",
+        "tonalRamp": [
+          "oklch(15% 0.017 86.5)",
+          "oklch(26% 0.017 86.5)",
+          "oklch(37% 0.017 86.5)",
+          "oklch(48% 0.017 86.5)",
+          "oklch(59% 0.017 86.5)",
+          "oklch(70% 0.017 86.5)",
+          "oklch(82% 0.017 86.5)",
+          "oklch(95% 0.017 86.5)"
         ]
       },
       "live": {
@@ -325,7 +342,7 @@
         "displayName": "Strong Hairline (dark)",
         "canonical": "#55524C",
         "oklch": "oklch(43.9% 0.010 84.6)",
-        "purpose": "Dark-theme indicating hairline.",
+        "purpose": "Dark-theme indicating hairline. Same seven usages; does not touch lamps.",
         "tonalRamp": [
           "oklch(15% 0.010 84.6)",
           "oklch(26% 0.010 84.6)",
@@ -335,6 +352,23 @@
           "oklch(70% 0.010 84.6)",
           "oklch(82% 0.010 84.6)",
           "oklch(95% 0.010 84.6)"
+        ]
+      },
+      "lamp-ring-dark": {
+        "role": "neutral",
+        "displayName": "Lamp Ring (dark)",
+        "canonical": "#6E6B64",
+        "oklch": "oklch(52.8% 0.011 87.5)",
+        "purpose": "Dark-theme lamp bezel. Measured 3.40:1 against the dark --ground.",
+        "tonalRamp": [
+          "oklch(15% 0.011 87.5)",
+          "oklch(26% 0.011 87.5)",
+          "oklch(37% 0.011 87.5)",
+          "oklch(48% 0.011 87.5)",
+          "oklch(59% 0.011 87.5)",
+          "oklch(70% 0.011 87.5)",
+          "oklch(82% 0.011 87.5)",
+          "oklch(95% 0.011 87.5)"
         ]
       },
       "live-dark": {
@@ -475,12 +509,12 @@
       },
       {
         "name": "mimic-lamp-keyframes",
-        "value": "0% rest (ground fill / rule-strong ring / scale(1)); 2% lit (live-dot fill and ring / scale(1.3)); 9% hold; 22%-100% rest",
+        "value": "0% rest (ground fill / lamp-ring bezel / scale(1)); 2% lit (live-dot fill and ring / scale(1.3)); 9% hold; 22%-100% rest",
         "purpose": "The lamp is lit for ~7% of the cycle (~0.49s) and dark for the rest."
       },
       {
         "name": "reduced-motion",
-        "value": "animation-duration: 0.001ms; iteration-count: 1; transition-duration: 0.001ms; rail repainted flat in --rule; lamps pinned at rest with transform: none",
+        "value": "animation-duration: 0.001ms; iteration-count: 1; transition-duration: 0.001ms; rail repainted flat in --rule; lamps pinned at rest with --ground fill, --lamp-ring bezel and transform: none",
         "purpose": "The sweep halts entirely and the rail reads as a static diagram."
       }
     ],
@@ -613,7 +647,7 @@
     "tokenWeighting": {
       "loadBearing": [
         "--ground / --ground-sunken / --ground-elev (the three-plane depth system)",
-        "--rule and --rule-strong (the two-weight hairline vocabulary that replaces shadow entirely)",
+        "--rule, --rule-strong and --lamp-ring (three greys with three jobs: divide, indicate, bezel a lamp) — the vocabulary that replaces shadow entirely",
         "--live and --live-dot (the one signal, gated to live state)",
         "--sans and --mono with the driven wdth axis (94 / 96 / 92 / 100)",
         "--cycle 7s and the five lamp delays 0.45 / 1.67 / 2.89 / 4.11 / 5.33s (the signature interaction's timing)",
@@ -626,6 +660,10 @@
         "the 99px scrollbar-thumb radius (browser furniture, not page geometry)",
         "the 180ms skip-link transform, the one duration outside --dur",
         "--rail-x: 4px, declared locally on .mimic only below 740px"
+      ],
+      "accessibilityFloors": [
+        "Non-text indicators clear 3:1 against their own ground: --lamp-ring measures 3.29:1 (light) and 3.40:1 (dark). --rule (1.54:1) and --rule-strong (2.42:1) are dividing and indicating lines, not indicators, and are not held to that floor.",
+        "All text pairs clear 4.5:1 in both themes; the tightest is --ink-mute on --ground-sunken at 4.66:1."
       ]
     }
   },
@@ -650,9 +688,9 @@
       "name": "Text Field",
       "kind": "input",
       "refersTo": "input-field",
-      "description": "Monospace uppercase label over a lit-plane field with a strong hairline border; the border and caret both report in signal green.",
+      "description": "Monospace uppercase label over a lit-plane field with a strong hairline border. The border darkens to --ink-mute on hover and turns signal green on focus, where the caret already is.",
       "html": "<div class=\"ds-field\"><label for=\"ds-f\">Work email</label><input id=\"ds-f\" type=\"email\" placeholder=\"\"><p class=\"ds-field-hint\">Roughly what it is, who runs it today, and how often.</p></div>",
-      "css": ".ds-field { display: grid; gap: 7px; } .ds-field label { font: 500 0.75rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-field input { width: 100%; padding: 13px 14px; background: var(--ground-elev, #FBFAF7); border: 1px solid var(--rule-strong, #A29D92); border-radius: 3px; color: var(--ink, #16150F); caret-color: var(--live, #17724A); font: 400 1rem/1.5 var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); transition: border-color 240ms cubic-bezier(0.22,1,0.36,1), background-color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-field input::placeholder { color: var(--ink-mute, #6B6859); } .ds-field input:focus { border-color: var(--live, #17724A); outline: 2px solid var(--live, #17724A); outline-offset: 1px; } .ds-field-hint { margin: 0; font-size: 0.8125rem; color: var(--ink-mute, #6B6859); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-field[data-invalid] input { border-color: var(--danger, #A3341F); }"
+      "css": ".ds-field { display: grid; gap: 7px; } .ds-field label { font: 500 0.75rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-field input { width: 100%; padding: 13px 14px; background: var(--ground-elev, #FBFAF7); border: 1px solid var(--rule-strong, #A29D92); border-radius: 3px; color: var(--ink, #16150F); caret-color: var(--live, #17724A); font: 400 1rem/1.5 var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); transition: border-color 240ms cubic-bezier(0.22,1,0.36,1), background-color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-field input::placeholder { color: var(--ink-mute, #6B6859); } .ds-field input:hover { border-color: var(--ink-mute, #6B6859); } .ds-field input:focus { border-color: var(--live, #17724A); outline: 2px solid var(--live, #17724A); outline-offset: 1px; } .ds-field-hint { margin: 0; font-size: 0.8125rem; color: var(--ink-mute, #6B6859); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-field[data-invalid] input { border-color: var(--danger, #A3341F); }"
     },
     {
       "name": "Masthead Navigation",
@@ -674,9 +712,9 @@
       "name": "Mimic Relay",
       "kind": "custom",
       "refersTo": "mimic-lamp",
-      "description": "The signature interaction. An 18%-wide signal-green sweep rides a 1px hairline rail from -20% to 120% over a 7s linear cycle; five lamps fire at 0.45/1.67/2.89/4.11/5.33s, exactly 1.22s apart, as the sweep centre reaches each dot. The page's only self-starting motion; it halts entirely under reduced motion.",
+      "description": "The signature interaction. An 18%-wide signal-green sweep rides a 1px hairline rail from -20% to 120% over a 7s linear cycle; five lamps — 11px circles bezelled in --lamp-ring — fire at 0.45/1.67/2.89/4.11/5.33s, exactly 1.22s apart, as the sweep centre reaches each dot. The page's only self-starting motion; it halts entirely under reduced motion.",
       "html": "<ol class=\"ds-mimic\" aria-label=\"How an engagement runs\"><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">1</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Map</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">2</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Build</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">3</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Integrate</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">4</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Prove</a></li><li class=\"ds-mimic-stage\"><span class=\"ds-mimic-ref\">5</span><span class=\"ds-mimic-dot\" aria-hidden=\"true\"></span><a class=\"ds-mimic-label\" href=\"#\">Hand over</a></li></ol>",
-      "css": ".ds-mimic { --dot: 11px; --rail-y: 30px; --cycle: 7s; position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-mimic::before { content: ''; position: absolute; left: 0; right: 0; top: calc(var(--rail-y) + (var(--dot) - 1px) / 2); height: 1px; background-image: linear-gradient(90deg, transparent 0%, var(--live, #17724A) 50%, transparent 100%), linear-gradient(var(--rule, #C9C5BC), var(--rule, #C9C5BC)); background-size: 18% 100%, 100% 100%; background-repeat: no-repeat; background-position: -20% 0, 0 0; animation: ds-mimic-sweep var(--cycle) linear infinite; } @keyframes ds-mimic-sweep { to { background-position: 120% 0, 0 0; } } .ds-mimic-stage { position: relative; padding-right: 16px; padding-top: var(--rail-y); } .ds-mimic-ref { position: absolute; top: 0; left: 0; font: 500 0.6875rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; color: var(--ink-mute, #6B6859); } .ds-mimic-dot { display: block; width: var(--dot); height: var(--dot); border-radius: 50%; background: var(--ground, #F4F2EE); border: 1.5px solid var(--rule-strong, #A29D92); position: relative; z-index: 1; animation: ds-mimic-lamp var(--cycle) linear infinite; } .ds-mimic-stage:nth-child(1) .ds-mimic-dot { animation-delay: 0.45s; } .ds-mimic-stage:nth-child(2) .ds-mimic-dot { animation-delay: 1.67s; } .ds-mimic-stage:nth-child(3) .ds-mimic-dot { animation-delay: 2.89s; } .ds-mimic-stage:nth-child(4) .ds-mimic-dot { animation-delay: 4.11s; } .ds-mimic-stage:nth-child(5) .ds-mimic-dot { animation-delay: 5.33s; } @keyframes ds-mimic-lamp { 0% { background: var(--ground, #F4F2EE); border-color: var(--rule-strong, #A29D92); transform: scale(1); } 2% { background: var(--live-dot, #1B8A57); border-color: var(--live-dot, #1B8A57); transform: scale(1.3); } 9% { background: var(--live-dot, #1B8A57); border-color: var(--live-dot, #1B8A57); transform: scale(1.3); } 22%, 100% { background: var(--ground, #F4F2EE); border-color: var(--rule-strong, #A29D92); transform: scale(1); } } .ds-mimic-label { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; font-size: clamp(0.9375rem, 1.35vw, 1.1875rem); font-weight: 500; letter-spacing: -0.02em; color: var(--ink, #16150F); text-decoration: none; transition: color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-mimic-label:hover { color: var(--live, #17724A); } .ds-mimic-label:focus-visible { outline: 2px solid var(--live, #17724A); outline-offset: 3px; border-radius: 2px; } @media (prefers-reduced-motion: reduce) { .ds-mimic::before { background-image: linear-gradient(var(--rule, #C9C5BC), var(--rule, #C9C5BC)); background-size: 100% 100%; background-position: 0 0; animation: none; } .ds-mimic-dot { animation: none; background: var(--ground, #F4F2EE); border-color: var(--rule-strong, #A29D92); transform: none; } }"
+      "css": ".ds-mimic { --dot: 11px; --rail-y: 30px; --cycle: 7s; position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-mimic::before { content: ''; position: absolute; left: 0; right: 0; top: calc(var(--rail-y) + (var(--dot) - 1px) / 2); height: 1px; background-image: linear-gradient(90deg, transparent 0%, var(--live, #17724A) 50%, transparent 100%), linear-gradient(var(--rule, #C9C5BC), var(--rule, #C9C5BC)); background-size: 18% 100%, 100% 100%; background-repeat: no-repeat; background-position: -20% 0, 0 0; animation: ds-mimic-sweep var(--cycle) linear infinite; } @keyframes ds-mimic-sweep { to { background-position: 120% 0, 0 0; } } .ds-mimic-stage { position: relative; padding-right: 16px; padding-top: var(--rail-y); } .ds-mimic-ref { position: absolute; top: 0; left: 0; font: 500 0.6875rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; color: var(--ink-mute, #6B6859); } .ds-mimic-dot { display: block; width: var(--dot); height: var(--dot); border-radius: 50%; background: var(--ground, #F4F2EE); border: 1.5px solid var(--lamp-ring, #8A857A); position: relative; z-index: 1; animation: ds-mimic-lamp var(--cycle) linear infinite; } .ds-mimic-stage:nth-child(1) .ds-mimic-dot { animation-delay: 0.45s; } .ds-mimic-stage:nth-child(2) .ds-mimic-dot { animation-delay: 1.67s; } .ds-mimic-stage:nth-child(3) .ds-mimic-dot { animation-delay: 2.89s; } .ds-mimic-stage:nth-child(4) .ds-mimic-dot { animation-delay: 4.11s; } .ds-mimic-stage:nth-child(5) .ds-mimic-dot { animation-delay: 5.33s; } @keyframes ds-mimic-lamp { 0% { background: var(--ground, #F4F2EE); border-color: var(--lamp-ring, #8A857A); transform: scale(1); } 2% { background: var(--live-dot, #1B8A57); border-color: var(--live-dot, #1B8A57); transform: scale(1.3); } 9% { background: var(--live-dot, #1B8A57); border-color: var(--live-dot, #1B8A57); transform: scale(1.3); } 22%, 100% { background: var(--ground, #F4F2EE); border-color: var(--lamp-ring, #8A857A); transform: scale(1); } } .ds-mimic-label { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; font-size: clamp(0.9375rem, 1.35vw, 1.1875rem); font-weight: 500; letter-spacing: -0.02em; color: var(--ink, #16150F); text-decoration: none; transition: color 240ms cubic-bezier(0.22,1,0.36,1); } .ds-mimic-label:hover { color: var(--live, #17724A); } .ds-mimic-label:focus-visible { outline: 2px solid var(--live, #17724A); outline-offset: 3px; border-radius: 2px; } @media (prefers-reduced-motion: reduce) { .ds-mimic::before { background-image: linear-gradient(var(--rule, #C9C5BC), var(--rule, #C9C5BC)); background-size: 100% 100%; background-position: 0 0; animation: none; } .ds-mimic-dot { animation: none; background: var(--ground, #F4F2EE); border-color: var(--lamp-ring, #8A857A); transform: none; } }"
     },
     {
       "name": "Engagement Stage Row",
@@ -690,9 +728,9 @@
       "name": "Record Card (awaiting data)",
       "kind": "card",
       "refersTo": "card-record",
-      "description": "An honest empty proof slot. The lamp is a hollow strong-hairline ring because the channel has no data; fields carry em dashes in tabular figures.",
+      "description": "An honest empty proof slot. The lamp is a hollow --lamp-ring ring at 3.29:1 because the channel has no data; fields carry em dashes in tabular figures.",
       "html": "<ul class=\"ds-records\"><li class=\"ds-record\" data-state=\"awaiting\"><div class=\"ds-record-head\"><h3 class=\"ds-record-title\">Client name</h3><p class=\"ds-record-state\"><span class=\"ds-record-lamp\" aria-hidden=\"true\"></span>Awaiting data</p></div><dl class=\"ds-record-fields\"><div><dt>Sector</dt><dd>&mdash;</dd></div><div><dt>Process</dt><dd>&mdash;</dd></div><div><dt>Before</dt><dd>&mdash;</dd></div><div><dt>After</dt><dd>&mdash;</dd></div></dl></li></ul>",
-      "css": ".ds-records { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin: 0; padding: 0; list-style: none; background: var(--rule, #C9C5BC); border-block: 1px solid var(--rule, #C9C5BC); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-record { background: var(--ground, #F4F2EE); padding: clamp(24px, 2.6vw, 34px) clamp(20px, 2.2vw, 30px); } .ds-record-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; } .ds-record-title { margin: 0; font-size: 1.125rem; font-weight: 500; letter-spacing: -0.022em; color: var(--ink-mute, #6B6859); } .ds-record-state { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin: 0; font: 500 0.6875rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-record-lamp { width: 7px; height: 7px; border-radius: 50%; background: none; border: 1px solid var(--rule-strong, #A29D92); } .ds-record-fields { display: grid; gap: 12px; margin: 0; } .ds-record-fields > div { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 16px; align-items: baseline; } .ds-record-fields dt { font: 400 0.75rem/1.5 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.06em; color: var(--ink-mute, #6B6859); } .ds-record-fields dd { margin: 0; color: var(--ink-mute, #6B6859); font-variant-numeric: tabular-nums; }"
+      "css": ".ds-records { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin: 0; padding: 0; list-style: none; background: var(--rule, #C9C5BC); border-block: 1px solid var(--rule, #C9C5BC); font-family: var(--sans, 'Archivo', ui-sans-serif, system-ui, sans-serif); } .ds-record { background: var(--ground, #F4F2EE); padding: clamp(24px, 2.6vw, 34px) clamp(20px, 2.2vw, 30px); } .ds-record-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; } .ds-record-title { margin: 0; font-size: 1.125rem; font-weight: 500; letter-spacing: -0.022em; color: var(--ink-mute, #6B6859); } .ds-record-state { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin: 0; font: 500 0.6875rem/1 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute, #6B6859); } .ds-record-lamp { width: 7px; height: 7px; border-radius: 50%; background: none; border: 1px solid var(--lamp-ring, #8A857A); } .ds-record-fields { display: grid; gap: 12px; margin: 0; } .ds-record-fields > div { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 16px; align-items: baseline; } .ds-record-fields dt { font: 400 0.75rem/1.5 var(--mono, 'Chivo Mono', ui-monospace, Menlo, monospace); letter-spacing: 0.06em; color: var(--ink-mute, #6B6859); } .ds-record-fields dd { margin: 0; color: var(--ink-mute, #6B6859); font-variant-numeric: tabular-nums; }"
     },
     {
       "name": "Deliverable Frame",
@@ -717,6 +755,7 @@
     "keyCharacteristics": [
       "Three ground planes only — sunken, default, elevated — and no fourth",
       "Elevation declared once, as a 1px hairline; zero box-shadow in the entire stylesheet",
+      "Three greys with three jobs: rule divides, rule-strong indicates, lamp-ring bezels a lamp",
       "Archivo with its wdth axis actually driven (94 / 96 / 92) for voice; Chivo Mono strictly for measurement",
       "One signal green, permitted only where a system reports live",
       "One self-starting motion moment on the page — the mimic sweep — and nothing else",
@@ -729,14 +768,14 @@
         "body": "Green is a report, not a brand colour. It is permitted only where something is genuinely reporting live: a lamp the sweep has just reached, a control the visitor is currently focused on or hovering, a caret in a field they are typing into, a status that actually succeeded. It never fills a heading, a divider, a background, or a resting button."
       },
       {
-        "name": "The Two-Hairline Rule",
+        "name": "The Three-Grey Rule",
         "section": "colors",
-        "body": "rule divides; rule-strong indicates. A line that only separates two blocks of content is rule. A line that says \"this is a link\" or \"this is a field\" or \"this lamp is off\" is rule-strong. Do not introduce a third hairline weight or colour."
+        "body": "Each grey has exactly one job. rule divides — band tops, row rules, frame borders. rule-strong indicates — a link's underline, a field's resting border, a note's left rule. lamp-ring bezels an unlit lamp, and nothing else. Do not borrow one for another's work, and do not introduce a fourth."
       },
       {
         "name": "The Unlit Lamp Rule",
         "section": "colors",
-        "body": "A lamp with no data behind it is a hollow ring in rule-strong, never a grey fill and never a green one. The three record lamps are unlit on purpose because those channels are awaiting real client data; lighting them would be the page claiming proof it does not have."
+        "body": "A lamp with no data behind it is a hollow ring in lamp-ring, never a grey fill and never a green one, and never a hairline grey borrowed from elsewhere. The ring must clear 3:1 against its ground because it is a non-text indicator; lamp-ring is the token that guarantees it. The three record lamps are unlit on purpose because those channels are awaiting real client data; lighting them would be the page claiming proof it does not have."
       },
       {
         "name": "The Measurement-Only Rule",
@@ -780,7 +819,7 @@
       }
     ],
     "dos": [
-      "Do declare elevation with a 1px hairline or a tonal plane change. rule divides, rule-strong indicates.",
+      "Do declare elevation with a 1px hairline or a tonal plane change. rule divides, rule-strong indicates, lamp-ring bezels a lamp.",
       "Do drive Archivo's width axis on display type — 94 on a hero line, 96 on a section head, 92 on a mark. Default width reads as a foreign typeface here.",
       "Do reserve Chivo Mono for numerals, keys, reference marks, state labels and field names — things being read as values.",
       "Do cap every text block: 62ch prose, 58ch leads and stage bodies, 54ch deliverable descriptions, 48ch wide-band leads, 20–26ch heads.",
@@ -789,19 +828,22 @@
       "Do theme browser surfaces from the palette — selection, caret, scrollbar, focus ring — on any new surface.",
       "Do keep every new colour value in both themes; the dark form is not an afterthought.",
       "Do halt any motion entirely under prefers-reduced-motion and render the affected element in its resting state, as the mimic rail does.",
-      "Do grow standalone controls to 44px below 760px or on a coarse pointer."
+      "Do grow standalone controls to 44px below 760px or on a coarse pointer.",
+      "Do hold any new non-text indicator to 3:1 against its own ground, and give it its own token rather than reusing a hairline grey — that is why lamp-ring exists.",
+      "Do make every declared hover state an actual change. A hover rule that restates the resting value is not a state."
     ],
     "donts": [
       "Don't add a box-shadow anywhere. The stylesheet has zero, and that is the rule.",
       "Don't add a fourth ground plane. Sunken, default, elevated — three.",
       "Don't use green as decoration, branding, a fill, or a heading colour. It reports live state only.",
-      "Don't light a lamp for a channel that has no data. Unlit is a hollow rule-strong ring, and it is honest.",
+      "Don't light a lamp for a channel that has no data. Unlit is a hollow lamp-ring ring, and it is honest.",
       "Don't add a second self-starting animation. The mimic sweep is the page's only unbidden motion; everything else responds to the visitor.",
       "Don't round a container. Radius belongs to controls (3px) and lamps (50%).",
       "Don't introduce a second filled button. Secondary actions are ruled links.",
       "Don't set body copy, headings, buttons or in-sentence links in Chivo Mono.",
       "Don't fill the empty right side of the hero. The stop at 54% is the composition.",
-      "Don't add a gradient. The only one in the system is the mimic sweep itself, and it is a moving light, not a surface."
+      "Don't add a gradient. The only one in the system is the mimic sweep itself, and it is a moving light, not a surface.",
+      "Don't use rule-strong on a lamp or lamp-ring on a rule. The three greys are not interchangeable."
     ]
   }
 }

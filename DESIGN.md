@@ -10,6 +10,7 @@ colors:
   ink-mute: "#6B6859"
   rule: "#C9C5BC"
   rule-strong: "#A29D92"
+  lamp-ring: "#8A857A"
   live: "#17724A"
   live-dot: "#1B8A57"
   danger: "#A3341F"
@@ -21,6 +22,7 @@ colors:
   ink-mute-dark: "#8C8980"
   rule-dark: "#34322E"
   rule-strong-dark: "#55524C"
+  lamp-ring-dark: "#6E6B64"
   live-dark: "#3FC47E"
   live-dot-dark: "#3FC47E"
   danger-dark: "#E8836B"
@@ -190,6 +192,7 @@ What this world refuses is as load-bearing as what it uses. There is no box-shad
 
 - Three ground planes only — sunken, default, elevated — and no fourth
 - Elevation declared once, as a 1px hairline; zero `box-shadow` in the entire stylesheet
+- Three greys with three jobs: `rule` divides, `rule-strong` indicates, `lamp-ring` bezels a lamp
 - Archivo with its `wdth` axis actually driven (94 / 96 / 92) for voice; Chivo Mono strictly for measurement
 - One signal green, permitted only where a system reports live
 - One self-starting motion moment on the page — the mimic sweep — and nothing else
@@ -212,7 +215,8 @@ A warm, low-chroma instrument palette: three grounds, three inks, two rules, one
 - **Reading Ink** (`ink-body`, light `#46443C` / dark `#BAB7AE`): body copy, nav links at rest, footer nav links, deliverable descriptions, and the theme toggle's glyph.
 - **Instrument Grey** (`ink-mute`, light `#6B6859` / dark `#8C8980`): every monospace readout — reference numerals, panel keys, record field names and values, record titles, state labels, form labels, hints, footer meta — plus the stage note and the contact alternate line. It is the colour of printed instrument text.
 - **Hairline** (`rule`, light `#C9C5BC` / dark `#34322E`): the diagram. Band tops, masthead and footer borders, stage and panel row rules, the records grid gap, the deliverable frame and its internal divisions, the theme toggle's resting border, and the unlit portion of the mimic rail.
-- **Strong Hairline** (`rule-strong`, light `#A29D92` / dark `#55524C`): the second, heavier hairline — reserved for lines that indicate something rather than merely divide. Ruled-link and nav-action underlines, the stage note's left rule, the unlit mimic lamp and record lamp rings, input borders at rest, and the scrollbar thumb.
+- **Strong Hairline** (`rule-strong`, light `#A29D92` / dark `#55524C`): the second, heavier hairline — reserved for lines that indicate something rather than merely divide. Ruled-link and nav-action underlines, the theme toggle's hover border, the stage note's left rule, input borders at rest, and the scrollbar (both `scrollbar-color` and the webkit thumb). It does not touch lamps.
+- **Lamp Ring** (`lamp-ring`, light `#8A857A` / dark `#6E6B64`): a third grey with one job — the bezel of an unlit lamp. Five usages, all lamp-related: the mimic dot's 1.5px border, the resting and returning stops of the lamp keyframes (0% and 22%/100%), the reduced-motion lamp override, and the 1px record lamp ring. It is darker than `rule-strong` on purpose: measured at 3.29:1 light and 3.40:1 dark against its ground, it clears WCAG 1.4.11's 3:1 floor for a non-text indicator, which the hairline greys do not.
 
 ### Tertiary
 
@@ -222,9 +226,9 @@ A warm, low-chroma instrument palette: three grounds, three inks, two rules, one
 
 **The Live-Only Rule.** Green is a report, not a brand colour. It is permitted only where something is genuinely reporting live: a lamp the sweep has just reached, a control the visitor is currently focused on or hovering, a caret in a field they are typing into, a status that actually succeeded. It never fills a heading, a divider, a background, or a resting button.
 
-**The Two-Hairline Rule.** `rule` divides; `rule-strong` indicates. A line that only separates two blocks of content is `rule`. A line that says "this is a link" or "this is a field" or "this lamp is off" is `rule-strong`. Do not introduce a third hairline weight or colour.
+**The Three-Grey Rule.** Each grey has exactly one job. `rule` divides — band tops, row rules, frame borders. `rule-strong` indicates — a link's underline, a field's resting border, a note's left rule. `lamp-ring` bezels an unlit lamp, and nothing else. Do not borrow one for another's work, and do not introduce a fourth.
 
-**The Unlit Lamp Rule.** A lamp with no data behind it is a hollow ring in `rule-strong`, never a grey fill and never a green one. The three record lamps are unlit on purpose because those channels are awaiting real client data; lighting them would be the page claiming proof it does not have.
+**The Unlit Lamp Rule.** A lamp with no data behind it is a hollow ring in `lamp-ring`, never a grey fill and never a green one, and never a hairline grey borrowed from elsewhere. The ring must clear 3:1 against its ground because it is a non-text indicator; `lamp-ring` is the token that guarantees it. The three record lamps are unlit on purpose because those channels are awaiting real client data; lighting them would be the page claiming proof it does not have.
 
 ## Typography
 
@@ -303,10 +307,10 @@ The form language is square. Every structural container — bands, the deliverab
 
 - **Control radius (3px)**: form inputs, textareas, and the submit button. Just enough to read as an operable control rather than a drawn box.
 - **Focus radius (2px)**: the `:focus-visible` outline's corner, so the ring hugs square elements without looking like a mistake.
-- **Round (50%)**: the theme toggle, the mimic lamps (11px), and the record lamps (7px). Circles in this world are lamps and lamp-shaped controls; nothing else is round.
+- **Round (50%)**: the theme toggle, the mimic lamps (11px), and the record lamps (7px). Circles in this world are lamps and lamp-shaped controls; nothing else is round. Both lamps are hollow at rest, ringed in `lamp-ring`.
 - **Pill (99px)**: the webkit scrollbar thumb only. Browser furniture, not page geometry.
 
-Borders are 1px everywhere except the mimic lamp ring, which is 1.5px so an 11px circle still reads as a bezelled indicator, and the scrollbar thumb, which carries a 3px `ground` border to inset it from the track.
+Borders are 1px everywhere except the mimic lamp ring, which is 1.5px in `lamp-ring` so an 11px circle still reads as a bezelled indicator, and the scrollbar thumb, which carries a 3px `ground` border to inset it from the track.
 
 ### Named Rules
 
@@ -334,7 +338,7 @@ The system has exactly one filled button.
 
 ### Cards / Containers
 
-- **Record card:** square, `ground` fill, padding `clamp(24px, 2.6vw, 34px) clamp(20px, 2.2vw, 30px)`, no border of its own — separation comes from the parent grid's 1px gap over a `rule` background, plus `border-block: 1px solid rule` on the grid.
+- **Record card:** square, `ground` fill, padding `clamp(24px, 2.6vw, 34px) clamp(20px, 2.2vw, 30px)`, carrying a 7px hollow `lamp-ring` lamp beside its monospace state line, no border of its own — separation comes from the parent grid's 1px gap over a `rule` background, plus `border-block: 1px solid rule` on the grid.
 - **Deliverable frame:** square, `ground-elev` fill, 1px `rule` border, a monospace uppercase label bar at `16px clamp(20px, 2.4vw, 34px)` with a 1px `rule` bottom border, then rows each divided by 1px `rule` with the last divider removed.
 - **Shadow strategy:** none. See Elevation & Depth.
 
@@ -342,6 +346,7 @@ The system has exactly one filled button.
 
 - **Style:** full width, `ground-elev` fill, 1px `rule-strong` border, 3px radius, `13px 14px` padding, Archivo 400 at `1rem`/1.5, `ink` text, `ink-mute` placeholder. Textareas resize vertically only with a 120px minimum height.
 - **Label:** Chivo Mono 500, `0.75rem`/1, `0.1em`, uppercase, `ink-mute`, 7px above its control.
+- **Hover:** the border darkens from `rule-strong` to `ink-mute`, transitioned over `240ms cubic-bezier(0.22, 1, 0.36, 1)` — the field acknowledges the pointer without yet reporting live. Green is held back for focus.
 - **Focus:** the border turns `live` and the caret is already `live` via `caret-color`; `outline-offset` tightens to 1px so the global focus ring sits close to the 3px corner.
 - **Error:** the field wrapper takes `data-invalid`, the border turns `danger`, and a `0.8125rem`/1.4 Archivo message in `danger` appears beneath. The hint line is `0.8125rem` in `ink-mute`.
 - **Status line:** a left-ruled block — 14px padding-left over a 1px border-left — in `live`, switching to `danger` on `data-tone="error"`, hidden entirely when empty.
@@ -359,9 +364,9 @@ The page's one authored motion moment, and the thing that must survive any futur
 
 - **The rail:** a 1px line positioned at `calc(var(--rail-y) + (var(--dot) - 1px) / 2)` — 30px from the top of each stage, aligned to the lamps' centres. It is painted as two stacked background layers: a moving `linear-gradient(90deg, transparent 0%, var(--live) 50%, transparent 100%)` sized `18%` of the rail width, over a static `rule` fill at `100%`.
 - **The sweep:** `background-position` animates from `-20%` to `120%` over a **7s linear infinite** cycle (`--cycle: 7s`). The sweep's centre therefore crosses one fifth of the rail every 1.22s.
-- **The lamps:** each lamp runs the same 7s linear infinite cycle with a staggered delay — **0.45s, 1.67s, 2.89s, 4.11s, 5.33s** — spaced exactly 1.22s apart so each lamp fires as the sweep's centre reaches its dot. The lamp keyframes: at 0% the lamp is `ground` fill with a `rule-strong` ring at `scale(1)`; at 2% it snaps to `live-dot` fill and ring at `scale(1.3)`; it holds through 9%; and from 22% to 100% it is back at rest. The lamp is lit for roughly 7% of the cycle — 0.49s — and dark for the rest.
+- **The lamps:** 11px circles with a 1.5px `lamp-ring` bezel. Each runs the same 7s linear infinite cycle with a staggered delay — **0.45s, 1.67s, 2.89s, 4.11s, 5.33s** — spaced exactly 1.22s apart so each lamp fires as the sweep's centre reaches its dot. The lamp keyframes: at 0% the lamp is `ground` fill with a `lamp-ring` bezel at `scale(1)`; at 2% it snaps to `live-dot` fill and ring at `scale(1.3)`; it holds through 9%; and from 22% to 100% it is back at rest. The lamp is lit for roughly 7% of the cycle — 0.49s — and dark for the rest.
 - **Narrow panels (≤739px):** the rail rotates to vertical. It becomes a 1px column inset 4px from the left with 6px of clearance top and bottom, the gradient swaps to `linear-gradient(180deg, …)` at `100% 18%`, and the animation switches to `mimic-sweep-y` running `0 -20%` to `0 120%`. Lamps move to `left: -30px` and the stage stacks the reference above the label.
-- **Reduced motion:** the sweep stops completely. `.mimic::before` is repainted as a flat `rule` line at full size, and every lamp is pinned to its resting state with `transform: none`. The rail still reads as a diagram; it simply is not running.
+- **Reduced motion:** the sweep stops completely. `.mimic::before` is repainted as a flat `rule` line at full size, and every lamp is pinned to its resting state — `ground` fill, `lamp-ring` bezel, `transform: none`. The rail still reads as a diagram; it simply is not running.
 
 ### Engagement Stage (signature)
 
@@ -387,7 +392,7 @@ Light is the default and is declared on bare `:root` with `color-scheme: light`.
 
 ### Do:
 
-- **Do** declare elevation with a 1px hairline or a tonal plane change. `rule` divides, `rule-strong` indicates.
+- **Do** declare elevation with a 1px hairline or a tonal plane change. `rule` divides, `rule-strong` indicates, `lamp-ring` bezels a lamp.
 - **Do** drive Archivo's width axis on display type — 94 on a hero line, 96 on a section head, 92 on a mark. Default width reads as a foreign typeface here.
 - **Do** reserve Chivo Mono for numerals, keys, reference marks, state labels and field names — things being read as values.
 - **Do** cap every text block: 62ch prose, 58ch leads and stage bodies, 54ch deliverable descriptions, 48ch wide-band leads, 20–26ch heads.
@@ -397,15 +402,18 @@ Light is the default and is declared on bare `:root` with `color-scheme: light`.
 - **Do** keep every new colour value in both themes; the dark form is not an afterthought.
 - **Do** halt any motion entirely under `prefers-reduced-motion` and render the affected element in its resting state, as the mimic rail does.
 - **Do** grow standalone controls to 44px below 760px or on a coarse pointer.
+- **Do** hold any new non-text indicator to 3:1 against its own ground, and give it its own token rather than reusing a hairline grey — that is why `lamp-ring` exists.
+- **Do** make every declared hover state an actual change. A hover rule that restates the resting value is not a state.
 
 ### Don't:
 
 - **Don't** add a `box-shadow` anywhere. The stylesheet has zero, and that is the rule.
 - **Don't** add a fourth ground plane. Sunken, default, elevated — three.
 - **Don't** use green as decoration, branding, a fill, or a heading colour. It reports live state only.
-- **Don't** light a lamp for a channel that has no data. Unlit is a hollow `rule-strong` ring, and it is honest.
+- **Don't** light a lamp for a channel that has no data. Unlit is a hollow `lamp-ring` ring, and it is honest.
 - **Don't** add a second self-starting animation. The mimic sweep is the page's only unbidden motion; everything else responds to the visitor.
 - **Don't** round a container. Radius belongs to controls (3px) and lamps (50%).
+- **Don't** use `rule-strong` on a lamp or `lamp-ring` on a rule. The three greys are not interchangeable.
 - **Don't** introduce a second filled button. Secondary actions are ruled links.
 - **Don't** set body copy, headings, buttons or in-sentence links in Chivo Mono.
 - **Don't** fill the empty right side of the hero. The stop at 54% is the composition.
