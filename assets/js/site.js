@@ -51,6 +51,11 @@
   var form = document.querySelector('[data-form]');
   if (!form) return;
 
+  /* Read the address off the page's own mailto link so it is never duplicated
+     in two places that can drift apart. */
+  var addressLink = document.querySelector('.contact__alt a[href^="mailto:"]');
+  var CONTACT_ADDRESS = addressLink ? addressLink.getAttribute('href') : 'mailto:hello@systim.example';
+
   var status = form.querySelector('[data-form-status]');
   var submit = form.querySelector('.submit');
   var label = form.querySelector('[data-submit-label]');
@@ -121,13 +126,29 @@
       return;
     }
 
-    /* No endpoint is wired yet — see CONTENT.md. Until one is, report that
-       honestly rather than showing a success state that did not happen. */
+    /* Until a posting endpoint is configured, hand the enquiry to the visitor's
+       own mail client with the fields already filled. A real route to a reply,
+       rather than a success state that never happened. */
     if (form.getAttribute('action') === '#') {
       event.preventDefault();
+      var get = function (id) { return (form.querySelector('#' + id) || {}).value || ''; };
+      var body = [
+        'Name: ' + get('f-name'),
+        'Company: ' + get('f-company'),
+        'Email: ' + get('f-email'),
+        '',
+        'The process:',
+        get('f-process')
+      ].join('\n');
+
+      window.location.href = CONTACT_ADDRESS
+        + '?subject=' + encodeURIComponent('Enquiry from ' + get('f-company'))
+        + '&body=' + encodeURIComponent(body);
+
       if (status) {
         status.removeAttribute('data-tone');
-        status.textContent = 'This form has no endpoint yet. Email hello@systim.example, or set the form action — see CONTENT.md.';
+        status.textContent = 'Opening your email client. If nothing happens, write to '
+          + CONTACT_ADDRESS.replace('mailto:', '') + ' directly.';
       }
       return;
     }

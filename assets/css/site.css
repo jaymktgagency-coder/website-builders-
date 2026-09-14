@@ -22,7 +22,6 @@
 
   --live:      #17724A;
   --live-dot:  #1B8A57;
-  --live-wash: rgba(23, 114, 74, 0.09);
 
   --danger: #A3341F;
 
@@ -53,8 +52,7 @@
     --rule-strong: #55524C;
     --live:      #3FC47E;
     --live-dot:  #3FC47E;
-    --live-wash: rgba(63, 196, 126, 0.12);
-    --danger: #E8836B;
+      --danger: #E8836B;
     color-scheme: dark;
   }
 }
@@ -70,7 +68,6 @@
   --rule-strong: #55524C;
   --live:      #3FC47E;
   --live-dot:  #3FC47E;
-  --live-wash: rgba(63, 196, 126, 0.12);
   --danger: #E8836B;
   color-scheme: dark;
 }
@@ -156,6 +153,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
 
 .band { padding-block: var(--band-y); }
 .band--ruled { border-top: 1px solid var(--rule); }
+.band--sunken { background: var(--ground-sunken); }
 
 .band__grid {
   display: grid;
@@ -167,6 +165,20 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(40px, 6vw, 110px);
   }
+
+  /* Stacked: head over its lead, held to one narrow column. */
+  .band__grid--stack {
+    grid-template-columns: minmax(0, 62ch);
+    gap: clamp(18px, 2.2vw, 30px);
+  }
+
+  /* Wide: head runs full measure, the lead settles under it to the right. */
+  .band__grid--wide {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(20px, 2.4vw, 34px);
+  }
+  .band__grid--wide .h2 { max-width: 26ch; }
+  .band__grid--wide .prose { justify-self: end; max-width: 48ch; }
 }
 
 .band__head { margin-bottom: clamp(48px, 6vw, 88px); }
@@ -313,36 +325,37 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
 
 /* --- Hero ----------------------------------------------------------------- */
 
-.hero { padding-top: clamp(44px, 6vw, 96px); padding-bottom: clamp(32px, 4vw, 56px); }
+.hero { padding-top: clamp(36px, 4.4vw, 68px); padding-bottom: clamp(32px, 4vw, 56px); }
 
 .hero__line {
-  font-size: clamp(2.05rem, 4.35vw, 4.6rem);
+  font-size: clamp(2.05rem, 6.67vw, 6rem);
   line-height: 1.06;
   letter-spacing: -0.032em;
   font-weight: 500;
   font-variation-settings: 'wdth' 94;
   color: var(--ink);
-  max-width: min(100%, 20ch);
+  max-width: 100%;
   text-wrap: balance;
 }
 
-.hero__foot {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(24px, 3vw, 40px);
-  margin-top: clamp(28px, 3.2vw, 48px);
-}
+/* FIX 4 — held to five of twelve columns; the remaining seven are the point. */
 @media (min-width: 940px) {
-  .hero__foot {
-    grid-template-columns: minmax(0, 46ch) minmax(0, auto);
-    justify-content: space-between;
-    align-items: end;
-    gap: clamp(40px, 6vw, 96px);
-  }
+  .hero__line { max-width: 54%; }
 }
 
-.hero__sub { font-size: clamp(1rem, 1.1vw, 1.125rem); line-height: 1.62; max-width: 52ch; }
-.hero__act { font-size: 1.0625rem; }
+.hero__act {
+  margin-top: clamp(18px, 2vw, 28px);
+  font-size: clamp(1rem, 1.1vw, 1.125rem);
+}
+
+.hero__foot { margin-top: clamp(30px, 3.4vw, 50px); }
+
+.hero__sub {
+  font-size: clamp(1rem, 1.1vw, 1.0625rem);
+  line-height: 1.62;
+  max-width: 58ch;
+  color: var(--ink-mute);
+}
 
 /* --- Mimic line ----------------------------------------------------------
    The page's one authored motion moment. A sweep crosses the line on its
@@ -355,7 +368,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin-top: clamp(52px, 6.4vw, 100px);
+  margin-top: clamp(44px, 5vw, 76px);
 }
 
 /* the rail, and the sweep riding it */
@@ -622,8 +635,8 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
 
 .deliverable__list > li {
   display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: 4px 18px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px 18px;
   padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.4vw, 34px);
   border-bottom: 1px solid var(--rule);
 }
@@ -631,18 +644,12 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
 
 @media (min-width: 800px) {
   .deliverable__list > li {
-    grid-template-columns: 2.5rem minmax(0, 14rem) minmax(0, 1fr);
-    gap: clamp(20px, 3vw, 56px);
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 64px);
     align-items: baseline;
   }
 }
 
-.deliverable__n {
-  font: 500 0.75rem/1.6 var(--mono);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
-  color: var(--ink-mute);
-}
 .deliverable__t {
   font-size: 1.0625rem;
   font-weight: 500;

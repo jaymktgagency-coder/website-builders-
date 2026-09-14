@@ -11,10 +11,13 @@ Ordered by how much each one costs you if it stays as-is.
 
 ## 1. Wire the contact form — `index.html`, `<form class="form">`
 
-**Blocking.** The form validates properly but has nowhere to send. Right now
-submitting it says so plainly rather than faking a success state.
+**Recommended, not blocking.** The form validates properly and already has a
+working fallback: while `action` is `#`, submitting composes an email in the
+visitor's own mail client with all four fields filled in, and tells them so.
+Nothing is faked and no enquiry is lost.
 
-Set the `action` and `method` on line ~330:
+A posting endpoint is still better — it works for people without a desktop mail
+client configured, and it gives you a record. Set `action` and `method`:
 
 ```html
 <form class="form" method="post" action="https://your-endpoint" novalidate data-form>
@@ -30,7 +33,8 @@ Any of these work with a static host, no backend needed:
 | Your own endpoint | anything accepting `POST` with `name`, `company`, `email`, `process` |
 
 Once `action` is no longer `#`, `assets/js/site.js` stops intercepting and lets
-the browser submit normally, showing a "Sending" state on the button.
+the browser submit normally, showing a "Sending" state on the button. The
+mailto fallback is bypassed automatically.
 
 **Also:** add a thank-you page or set a redirect, so a successful submit lands
 somewhere deliberate.
@@ -41,8 +45,9 @@ somewhere deliberate.
 
 `hello@systim.example` is a reserved example domain and will bounce.
 
-- `index.html` line ~322 — the `mailto:` link and its visible text
-- `assets/js/site.js` — the no-endpoint fallback message
+Change it in **one place only** — `index.html`, the `mailto:` link in
+`<p class="contact__alt">` (and its visible text). The JavaScript reads the
+address off that link, so the mailto fallback follows it automatically.
 
 ---
 
@@ -117,7 +122,17 @@ pairing" in stage 5 — make them agree.
 
 ---
 
-## 7. Optional additions
+## 7. Hero copy, if you want it sharper
+
+The headline is `We build your automation, then hand it back running.` It is
+deliberately short so it can carry real display scale. The specifics live in
+the paragraph below it. If you change the headline, keep it under ~55
+characters or it will wrap past four lines and push the process line below the
+fold.
+
+---
+
+## 8. Optional additions
 
 - **Pricing.** Nothing is published. You left this undecided. If you add it,
   the `.panel` row pattern is the natural home.
