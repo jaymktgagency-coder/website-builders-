@@ -10,50 +10,46 @@ item 1 is the only thing standing between this and a live site.
 
 ---
 
-## 1. Add your Formspree form ID — the only thing blocking launch
+## 1. Click the FormSubmit activation link — the only thing blocking launch
 
-**Blocking.** Everything else about the form is finished and tested: it
-validates, posts in the background, resets on success, and keeps what the
-visitor typed if the send fails. The one missing piece is the form ID, which
-only you can create.
+**Blocking, and it takes one click.** The form is wired to FormSubmit at
+`https://formsubmit.co/ajax/jaymktgagency@gmail.com`. No account was needed.
 
-1. Go to [formspree.io](https://formspree.io), sign in, and create a new form.
-   Point it at **jaymktgagency@gmail.com**.
-2. Formspree gives you an endpoint like `https://formspree.io/f/mqazwxyz`.
-3. Copy the 8-character ID and paste it over `YOUR_FORMSPREE_ID` in
-   `index.html`:
+FormSubmit requires one-time activation before it will deliver anything. A test
+submission has already been sent, so **an email from FormSubmit is already in
+the jaymktgagency@gmail.com inbox** with an "Activate Form" link. Click it and
+the form is live. Nothing in the code needs to change.
 
-```html
-<form class="form" method="post" action="https://formspree.io/f/YOUR_FORMSPREE_ID" novalidate data-form>
+Until you click it, the live service replies:
+
+```json
+{"success":"false","message":"This form needs Activation. We've sent you an
+email containing an 'Activate Form' link..."}
 ```
 
-That is the whole change. Nothing else needs editing.
+**Note it returns HTTP 200 while refusing.** The submit handler therefore reads
+the response body rather than trusting the status code — a status-only check
+would have shown a visitor "Thank you" for a message that was never delivered.
+Verified against both of FormSubmit's real response shapes:
 
-**Until you do that**, the form deliberately does not send. It shows
-"This form is not connected yet. Please email us directly at
-jaymktgagency@gmail.com." and fires no network request at all — it will never
-POST to a URL that does not exist, and never shows a success state that did
-not happen. Verified in a browser.
-
-**Verified working end to end** against a live test endpoint:
-
-| Situation | What the visitor gets |
+| Service replies | What the visitor gets |
 |---|---|
-| Placeholder still in place | Honest "not connected" notice, their input kept, no request sent |
-| Submit succeeds | All four fields delivered, form clears, thank-you message |
-| Server returns an error | Error notice, their input kept so they can retry |
-| Network unreachable | Same as above — nothing is silently lost |
-| Empty or invalid fields | Each field flagged at the field, no request sent |
+| `success:"false"` (not yet activated) | Error notice, their input kept, nothing lost |
+| `success:"true"` (after activation) | Thank-you message, form clears |
+| HTTP error or unreachable | Error notice, their input kept |
+| Invalid or empty fields | Flagged per field, no request sent |
 
-**Set a redirect too** (optional): Formspree can bounce visitors to a
-thank-you page. Not needed — the page shows its own confirmation without
-navigating away, which is better.
+**What gets sent:** name, company, email, process, plus four control fields —
+`_subject` (the email subject line), `_template=table` (readable formatting),
+`_captcha=false` (no interstitial), and `_honey`, a hidden spam trap that only
+a bot fills in.
 
-**Don't want to sign up?** [FormSubmit.co](https://formsubmit.co) needs no
-account at all — the action becomes
-`https://formsubmit.co/jaymktgagency@gmail.com` and it emails you directly
-after one confirmation click. The code works with it unchanged. Say the word
-and I'll switch it.
+**One consequence of this endpoint:** your address sits in the page source in
+the form action as well as the mailto link, so scrapers get it twice. If that
+becomes a problem, FormSubmit issues a random alias endpoint
+(`formsubmit.co/ajax/<random-string>`) from its dashboard after activation —
+swapping the action to that hides the address completely. Worth doing once the
+site is public.
 
 ---
 
@@ -177,7 +173,7 @@ fold.
   promises "a reply from the person who would run the engagement" — a short
   named section would make that concrete.
 - **Legal.** No privacy policy or company registration details. You now
-  collect personal data through a third-party processor (Formspree, whose
+  collect personal data through a third-party processor (FormSubmit, whose
   servers are in the US), so under UK GDPR / GDPR you need a privacy notice
   saying what you collect, why, where it goes, and how long you keep it. A
   short page linked from the footer is enough. This matters more now that the

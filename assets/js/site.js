@@ -95,7 +95,10 @@
     return true;
   }
 
-  var inputs = Array.prototype.slice.call(form.querySelectorAll('input, textarea'));
+  /* Only the visible fields the visitor fills. Scoping to .field keeps the
+     service's hidden control inputs — including the empty _honey spam trap —
+     out of validation, where they would fail on a field nobody can see. */
+  var inputs = Array.prototype.slice.call(form.querySelectorAll('.field input, .field textarea'));
 
   inputs.forEach(function (input) {
     /* Validate on the way out, then keep it honest as they fix it. */
@@ -137,10 +140,9 @@
 
     var endpoint = form.getAttribute('action');
 
-    /* Treat the shipped placeholder as unconfigured so the form can never POST
-       to a URL that does not exist. Say so plainly rather than dropping the
-       enquiry into a success state that never happened. */
-    if (!endpoint || endpoint === '#' || endpoint.indexOf('YOUR_FORMSPREE_ID') !== -1) {
+    /* No endpoint configured: say so plainly rather than dropping the enquiry
+       into a success state that never happened. */
+    if (!endpoint || endpoint === '#') {
       event.preventDefault();
       setStatus('This form is not connected yet. Please email us directly at '
         + contactAddress() + '.', 'error');
@@ -161,6 +163,18 @@
       headers: { 'Accept': 'application/json' }
     }).then(function (response) {
       if (!response.ok) throw new Error('HTTP ' + response.status);
+      return response.json().catch(function () { return null; });
+    }).then(function (data) {
+      /* A 200 is not proof of delivery. FormSubmit answers 200 with its own
+         marketing page when it refuses a request, and most form services
+         report refusal in the body rather than the status. Trust the payload:
+         only an explicit non-failure counts as sent. */
+      if (data) {
+        if ('success' in data && String(data.success) !== 'true') {
+          throw new Error(data.message || 'rejected');
+        }
+        if (data.errors && data.errors.length) throw new Error('rejected');
+      }
       form.reset();
       inputs.forEach(clearError);
       setStatus('Thank you. We have your note and will reply from a real person, '
