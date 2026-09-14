@@ -5,49 +5,66 @@ claims a client, a metric, a logo, a testimonial or a partnership — those slot
 are built and styled but deliberately empty, so the page is honest until you
 fill them.
 
-Ordered by how much each one costs you if it stays as-is.
+Ordered by how much each one costs you if it stays as-is. Item 2 is done;
+item 1 is the only thing standing between this and a live site.
 
 ---
 
-## 1. Wire the contact form — `index.html`, `<form class="form">`
+## 1. Add your Formspree form ID — the only thing blocking launch
 
-**Recommended, not blocking.** The form validates properly and already has a
-working fallback: while `action` is `#`, submitting composes an email in the
-visitor's own mail client with all four fields filled in, and tells them so.
-Nothing is faked and no enquiry is lost.
+**Blocking.** Everything else about the form is finished and tested: it
+validates, posts in the background, resets on success, and keeps what the
+visitor typed if the send fails. The one missing piece is the form ID, which
+only you can create.
 
-A posting endpoint is still better — it works for people without a desktop mail
-client configured, and it gives you a record. Set `action` and `method`:
+1. Go to [formspree.io](https://formspree.io), sign in, and create a new form.
+   Point it at **jaymktgagency@gmail.com**.
+2. Formspree gives you an endpoint like `https://formspree.io/f/mqazwxyz`.
+3. Copy the 8-character ID and paste it over `YOUR_FORMSPREE_ID` in
+   `index.html`:
 
 ```html
-<form class="form" method="post" action="https://your-endpoint" novalidate data-form>
+<form class="form" method="post" action="https://formspree.io/f/YOUR_FORMSPREE_ID" novalidate data-form>
 ```
 
-Any of these work with a static host, no backend needed:
+That is the whole change. Nothing else needs editing.
 
-| Option | Notes |
+**Until you do that**, the form deliberately does not send. It shows
+"This form is not connected yet. Please email us directly at
+jaymktgagency@gmail.com." and fires no network request at all — it will never
+POST to a URL that does not exist, and never shows a success state that did
+not happen. Verified in a browser.
+
+**Verified working end to end** against a live test endpoint:
+
+| Situation | What the visitor gets |
 |---|---|
-| Formspree | `action="https://formspree.io/f/XXXX"` — free tier, spam filtering |
-| Netlify Forms | add `netlify` attribute, works automatically on Netlify |
-| Basin / Formcarry | similar drop-in posts |
-| Your own endpoint | anything accepting `POST` with `name`, `company`, `email`, `process` |
+| Placeholder still in place | Honest "not connected" notice, their input kept, no request sent |
+| Submit succeeds | All four fields delivered, form clears, thank-you message |
+| Server returns an error | Error notice, their input kept so they can retry |
+| Network unreachable | Same as above — nothing is silently lost |
+| Empty or invalid fields | Each field flagged at the field, no request sent |
 
-Once `action` is no longer `#`, `assets/js/site.js` stops intercepting and lets
-the browser submit normally, showing a "Sending" state on the button. The
-mailto fallback is bypassed automatically.
+**Set a redirect too** (optional): Formspree can bounce visitors to a
+thank-you page. Not needed — the page shows its own confirmation without
+navigating away, which is better.
 
-**Also:** add a thank-you page or set a redirect, so a successful submit lands
-somewhere deliberate.
+**Don't want to sign up?** [FormSubmit.co](https://formsubmit.co) needs no
+account at all — the action becomes
+`https://formsubmit.co/jaymktgagency@gmail.com` and it emails you directly
+after one confirmation click. The code works with it unchanged. Say the word
+and I'll switch it.
 
 ---
 
-## 2. Replace the email address — 2 places
+## 2. Contact email — done
 
-`hello@systim.example` is a reserved example domain and will bounce.
+`jaymktgagency@gmail.com` is live in `index.html`, in the
+`<p class="contact__alt">` link.
 
-Change it in **one place only** — `index.html`, the `mailto:` link in
-`<p class="contact__alt">` (and its visible text). The JavaScript reads the
-address off that link, so the mailto fallback follows it automatically.
+It lives in **exactly one place**. The JavaScript reads the address out of
+that link, so the form's error messages always quote whatever is there. If you
+ever change it, change it there and nothing else.
 
 ---
 
@@ -72,9 +89,10 @@ Then in `index.html`, for each `<li class="record" data-state="awaiting">`:
 3. replace each `—` in the `<dd>` elements
 4. delete the `<p class="record__state">…</p>` block, or change its text
 
-The intro copy above the section currently promises "published with the
-client's permission and their own numbers. Nothing here is modelled or
-estimated." **Keep that true or change the sentence.**
+The intro copy above the section reads "Three engagement records **will be**
+published here, with the client's permission and their own numbers. Nothing
+here **will be** modelled or estimated." It is future tense on purpose. When
+you fill the slots, switch it to present tense — and keep it true.
 
 If you would rather not show work at all yet, delete the whole
 `<section class="band band--ruled" id="work">` block and the two matching nav
@@ -82,11 +100,29 @@ links (`#work` appears once in the footer nav).
 
 ---
 
-## 4. Confirm the integration list — `<dl class="panel">`
+## 4. Integration list — claim corrected, accuracy still yours to confirm
 
-These are written as integration targets you work with regularly. They are
-**not** claimed partnerships or certifications, and no logos are used, which
-keeps it defensible. But you should still confirm the list is true:
+**What changed.** The copy used to read "Integration targets we work with
+**regularly**" — which asserts a track record you do not have evidence for
+yet. That was an overclaim and it is gone. It now reads:
+
+> These are the systems the work usually has to reach. Integration is built
+> against each vendor's public API, the same way your own engineers would do
+> it.
+
+and the panel carries an explicit line beneath it:
+
+> Product names above are the trademarks of their respective owners. systim is
+> not affiliated with, endorsed by, or a certified partner of any of them.
+
+No logos are used anywhere, which is the other half of not implying
+endorsement. Between the two, the section now reads as capability and
+positioning, and cannot reasonably be read as claiming a partnership,
+certification, or reseller status.
+
+**Still yours to confirm:** whether you can actually build against each of
+these. Naming a system is a capability claim even without a partnership claim,
+and a technical buyer will ask. Cut anything you have not worked with:
 
 > Records — Salesforce, HubSpot, NetSuite, Dynamics, Pipedrive
 > Data — Postgres, Snowflake, BigQuery, Databricks, S3
@@ -94,7 +130,8 @@ keeps it defensible. But you should still confirm the list is true:
 > Documents — Google Workspace, SharePoint, Box, DocuSign
 > Anything else — REST, GraphQL, SFTP, Webhooks, and the internal tool nobody has documented since 2019
 
-Cut anything you have not actually integrated with. A buyer will ask.
+If some are aspirational rather than done, the honest framing is a narrower
+list. A short true list reads stronger than a long unverifiable one.
 
 ---
 
@@ -139,8 +176,16 @@ fold.
 - **Team.** No bios, no headshots, no founding date. The contact section
   promises "a reply from the person who would run the engagement" — a short
   named section would make that concrete.
-- **Legal.** No privacy policy or company registration details. Most
-  jurisdictions require these once you collect form data.
+- **Legal.** No privacy policy or company registration details. You now
+  collect personal data through a third-party processor (Formspree, whose
+  servers are in the US), so under UK GDPR / GDPR you need a privacy notice
+  saying what you collect, why, where it goes, and how long you keep it. A
+  short page linked from the footer is enough. This matters more now that the
+  form actually sends.
+- **Address harvesting.** `jaymktgagency@gmail.com` sits in the page source as
+  a plain `mailto:`, so scrapers will find it. That is the trade for making it
+  one-click for real buyers, and it is usually the right trade — but expect
+  some spam, and consider a dedicated address rather than a personal one.
 - **Social preview image.** `og:title` and `og:description` are set;
   `og:image` is not. A 1200×630 image would make shared links look intentional.
 

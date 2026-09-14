@@ -567,6 +567,13 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
   letter-spacing: -0.012em;
 }
 
+.panel__note {
+  max-width: 62ch;
+  margin-top: clamp(20px, 2.2vw, 30px);
+  font: 400 0.8125rem/1.6 var(--sans);
+  color: var(--ink-mute);
+}
+
 /* --- Records: channels awaiting data -------------------------------------- */
 
 .records {

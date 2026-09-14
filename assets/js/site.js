@@ -51,11 +51,6 @@
   var form = document.querySelector('[data-form]');
   if (!form) return;
 
-  /* Read the address off the page's own mailto link so it is never duplicated
-     in two places that can drift apart. */
-  var addressLink = document.querySelector('.contact__alt a[href^="mailto:"]');
-  var CONTACT_ADDRESS = addressLink ? addressLink.getAttribute('href') : 'mailto:hello@systim.example';
-
   var status = form.querySelector('[data-form-status]');
   var submit = form.querySelector('.submit');
   var label = form.querySelector('[data-submit-label]');
@@ -110,6 +105,23 @@
     });
   });
 
+  function contactAddress() {
+    var link = document.querySelector('.contact__alt a[href^="mailto:"]');
+    return link ? link.getAttribute('href').replace(/^mailto:/, '').split('?')[0] : 'our contact address';
+  }
+
+  function setStatus(message, tone) {
+    if (!status) return;
+    status.textContent = message;
+    if (tone) { status.setAttribute('data-tone', tone); }
+    else { status.removeAttribute('data-tone'); }
+  }
+
+  function setBusy(busy) {
+    if (submit) submit.disabled = busy;
+    if (label) label.textContent = busy ? 'Sending' : 'Send';
+  }
+
   form.addEventListener('submit', function (event) {
     var first = null;
     inputs.forEach(function (input) {
@@ -118,48 +130,46 @@
 
     if (first) {
       event.preventDefault();
-      if (status) {
-        status.textContent = 'Check the highlighted fields and send again.';
-        status.setAttribute('data-tone', 'error');
-      }
-      if (first) first.focus();
+      setStatus('Check the highlighted fields and send again.', 'error');
+      first.focus();
       return;
     }
 
-    /* Until a posting endpoint is configured, hand the enquiry to the visitor's
-       own mail client with the fields already filled. A real route to a reply,
-       rather than a success state that never happened. */
-    if (form.getAttribute('action') === '#') {
+    var endpoint = form.getAttribute('action');
+
+    /* Treat the shipped placeholder as unconfigured so the form can never POST
+       to a URL that does not exist. Say so plainly rather than dropping the
+       enquiry into a success state that never happened. */
+    if (!endpoint || endpoint === '#' || endpoint.indexOf('YOUR_FORMSPREE_ID') !== -1) {
       event.preventDefault();
-      var get = function (id) { return (form.querySelector('#' + id) || {}).value || ''; };
-      var body = [
-        'Name: ' + get('f-name'),
-        'Company: ' + get('f-company'),
-        'Email: ' + get('f-email'),
-        '',
-        'The process:',
-        get('f-process')
-      ].join('\n');
-
-      var href = CONTACT_ADDRESS
-        + '?subject=' + encodeURIComponent('Enquiry from ' + get('f-company'))
-        + '&body=' + encodeURIComponent(body);
-
-      /* Paint the fallback line before navigating: assigning location.href
-         first can pre-empt the repaint, leaving the visitor with nothing to
-         read if no mail client opens. */
-      if (status) {
-        status.removeAttribute('data-tone');
-        status.textContent = 'Opening your email client. If nothing happens, write to '
-          + CONTACT_ADDRESS.replace('mailto:', '') + ' directly.';
-      }
-      window.setTimeout(function () { window.location.href = href; }, 60);
+      setStatus('This form is not connected yet. Please email us directly at '
+        + contactAddress() + '.', 'error');
       return;
     }
 
-    if (submit) {
-      submit.disabled = true;
-      if (label) label.textContent = 'Sending';
-    }
+    /* Post in the background so the visitor keeps the page, their input, and
+       the error if it fails. A normal navigation submit would lose all three. */
+    if (!window.fetch || !window.FormData) return;   /* let the browser submit */
+
+    event.preventDefault();
+    setBusy(true);
+    setStatus('Sending\u2026');
+
+    window.fetch(endpoint, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (response) {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      form.reset();
+      inputs.forEach(clearError);
+      setStatus('Thank you. We have your note and will reply from a real person, '
+        + 'usually within two working days.');
+    }).catch(function () {
+      setStatus('That did not send. Please try again, or email us directly at '
+        + contactAddress() + '.', 'error');
+    }).then(function () {
+      setBusy(false);
+    });
   });
 })();
