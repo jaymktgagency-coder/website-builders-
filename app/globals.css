@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0a08;
+  --color-stock: #14120e;
+  --color-stock-2: #1c1914;
+  --color-deboss: #2c2821;
+  --color-line: rgb(214 178 104 / 0.16);
+  --color-line-strong: rgb(214 178 104 / 0.42);
+  --color-gold: #d6b268;
+  --color-gold-bright: #f3dca6;
+  --color-gold-deep: #8f6d31;
+  --color-paper: #f2ebdd;
+  --color-muted: #aaa190;
+
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  /* Foil highlight position, 0–100. Driven by FoilLight on pointer/scroll. */
+  --sx: 38;
+  color-scheme: dark;
+  scroll-padding-top: 5rem;
+}
+
+html {
+  background: var(--color-ink);
+  scrollbar-color: var(--color-gold-deep) var(--color-ink);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-deep);
+  border-radius: 10px;
+  border: 2px solid var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+input,
+select,
+textarea {
+  caret-color: var(--color-gold-bright);
+}
+
+/* Extended heavy caps: the foil-stamp voice. */
+.stamp {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-variation-settings: "wdth" 125;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+}
+
+/* Gold foil: a metallic ramp whose highlight follows the light. */
+.foil {
+  background-image: linear-gradient(
+    102deg,
+    #6d5020 0%,
+    #b48a3f calc(var(--sx) * 1% - 34%),
+    #e6c783 calc(var(--sx) * 1% - 9%),
+    #fff4d6 calc(var(--sx) * 1%),
+    #e2c07a calc(var(--sx) * 1% + 9%),
+    #a57c34 calc(var(--sx) * 1% + 30%),
+    #5f451a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Foil edge for plates and the lit card. */
+.foil-edge {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--plate, var(--color-stock)), var(--plate, var(--color-stock))) padding-box,
+    linear-gradient(
+        102deg,
+        #5f451a,
+        #c9a256 calc(var(--sx) * 1% - 12%),
+        #fff1cc calc(var(--sx) * 1%),
+        #c9a256 calc(var(--sx) * 1% + 12%),
+        #5f451a
+      )
+      border-box;
+}
+
+/* Blind deboss: pressed into the stock, no foil. Used for what isn't confirmed. */
+.deboss {
+  color: var(--color-deboss);
+  text-shadow:
+    0 1px 0 rgb(255 255 255 / 0.07),
+    0 -1px 0 rgb(0 0 0 / 0.9);
+}
+
+/* Solid foil plate: the primary action. */
+.plate-gold {
+  background-image: linear-gradient(
+    102deg,
+    #a47a33 0%,
+    #d9b56b calc(var(--sx) * 1% - 20%),
+    #f6e2b0 calc(var(--sx) * 1%),
+    #d4ae62 calc(var(--sx) * 1% + 20%),
+    #9a722e 100%
+  );
+  color: #15110a;
+  box-shadow:
+    0 1px 0 rgb(255 244 214 / 0.5) inset,
+    0 10px 30px -12px rgb(214 178 104 / 0.55);
+}
+
+/* Die-cut card stock with a faint lamination sheen. */
+.card-stock {
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgb(214 178 104 / 0.06), transparent 55%),
+    var(--color-stock);
+}
+
+.stamp-in {
+  animation: stamp-in 1.4s var(--ease-out-expo) both;
+}
+@keyframes stamp-in {
+  from {
+    --sx: -40;
+    filter: blur(6px);
+    opacity: 0.35;
+    transform: translateY(0.04em) scale(1.015);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@property --sx {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 38;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-in {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (forced-colors: active) {
+  .foil {
+    color: CanvasText;
+    background: none;
+  }
+}
