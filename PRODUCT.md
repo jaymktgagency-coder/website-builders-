@@ -41,7 +41,7 @@ Club Vault has been serving South Florida since 2010. On different nights the ro
 
 ## Capabilities and Constraints
 
-- The site has no booking backend. Reservation and inquiry forms hand off to the phone, SMS or email.
+- Table reservations go through phone or SMS to each night's host. Private-event inquiries are sent through FormSubmit to admin@megavaultinc.com.
 - **Undecided or unknown. Show clearly labeled placeholders; never invent these:**
   - bottle service and table packages, and prices
   - drink and food menu, and prices
@@ -62,7 +62,7 @@ Club Vault has been serving South Florida since 2010. On different nights the ro
 
 - Google rating: 4.1 from 199 reviews (Sept 2026). No review quotes are approved for use.
 - Squarespace "Recent Press" items on club-vault.com are template filler and must not be used.
-- No real photography in the repo yet.
+- 20 of the club's own photos from club-vault.com/gallery are in `public/photos/` (mostly venue and private-event setups; no bottle-service or DJ shots). Photos showing children (kids' parties) and a "Kidsfinity" branded shot were left out on purpose.
 
 ## Product Principles
 

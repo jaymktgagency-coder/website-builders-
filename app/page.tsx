@@ -1,15 +1,15 @@
-import fs from "node:fs";
-import path from "node:path";
 import Image from "next/image";
-import { ArrowUpRight, Camera, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Navigation, Phone } from "lucide-react";
 import {
   bottlePackages,
-  gallerySlots,
+  gallery,
   houseRules,
   menu,
+  photos,
   privateEvents,
   venue,
   week,
+  type Photo,
 } from "@/lib/venue";
 import { FoilLight } from "./_components/FoilLight";
 import { InquiryForm } from "./_components/InquiryForm";
@@ -25,6 +25,15 @@ const nav = [
   { href: "#private-events", label: "Private events" },
   { href: "#visit", label: "Visit" },
 ];
+
+/** A framed photo that fills its box; the caller sets the box's size. */
+function Framed({ photo, sizes, className = "", priority = false }: { photo: Photo; sizes: string; className?: string; priority?: boolean }) {
+  return (
+    <div className={`relative overflow-hidden rounded-xl border border-line bg-stock ${className}`}>
+      <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} className="object-cover" />
+    </div>
+  );
+}
 
 const fullAddress = `${venue.address.street}, ${venue.address.city}, ${venue.address.region} ${venue.address.postalCode}`;
 
@@ -86,7 +95,19 @@ function Header() {
 
 function Hero() {
   return (
-    <section aria-label="Club Vault" className="relative overflow-hidden">
+    <section aria-label="Club Vault" className="relative isolate overflow-hidden">
+      <Image
+        src={photos.hero.src}
+        alt={photos.hero.alt}
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover object-[50%_40%]"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(11_10_8/0.82)_0%,rgb(11_10_8/0.62)_40%,rgb(11_10_8/0.9)_78%,var(--color-ink)_100%),radial-gradient(90%_70%_at_20%_45%,rgb(11_10_8/0.55),transparent_70%)]"
+      />
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:min-h-[calc(84svh-4rem)] lg:grid-cols-12 lg:items-center lg:pb-20">
         <div className="min-w-0 lg:col-span-8">
           <h1 className="stamp foil stamp-in text-[clamp(3.3rem,21.5vw,11.5rem)] leading-[0.8]">
@@ -139,6 +160,7 @@ function Nights() {
             night&apos;s host. Sundays open at noon, and we&apos;re closed Mondays.
           </Lede>
         </div>
+        <Framed photo={photos.nights} sizes="(min-width: 1280px) 1232px, 100vw" className="mb-3 aspect-[4/3] sm:aspect-[21/9]" />
         <Week />
       </div>
     </section>
@@ -161,6 +183,14 @@ function Tables() {
         </div>
 
         <div className="lg:col-span-5 lg:col-start-8">
+          <div className="mb-10 grid grid-cols-2 gap-3">
+            <Framed photo={photos.vip[0]} sizes="(min-width: 1024px) 40vw, 100vw" className="col-span-2 aspect-[3/2]" />
+            <Framed photo={photos.vip[1]} sizes="(min-width: 1024px) 20vw, 50vw" className="aspect-[4/3]" />
+            <div className="card-stock flex aspect-[4/3] flex-col justify-end rounded-xl border border-line p-4">
+              <p className="stamp text-[1.1rem] leading-tight text-gold">Booths, cabanas & lounges</p>
+              <p className="mt-1 text-[0.85rem] text-muted">Indoor and outdoor seating</p>
+            </div>
+          </div>
           <h3 className="text-[1.25rem] font-semibold">Bottle packages</h3>
           <p className="mt-2 text-muted">
             Package and pricing details are on their way. Until then, ask your host what&apos;s on the list tonight.
@@ -208,7 +238,8 @@ function Menu() {
             ask your host.
           </Lede>
         </div>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-3">
+        <Framed photo={photos.bar} sizes="(min-width: 1280px) 1232px, 100vw" className="mt-12 aspect-[4/3] sm:aspect-[21/9]" />
+        <div className="mt-3 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-3">
           {menu.map((m) => (
             <div key={m.heading} className="bg-ink p-6 sm:p-8">
               <h3 className="stamp text-[1.15rem] tracking-[0.04em] text-gold">{m.heading}</h3>
@@ -242,7 +273,12 @@ function PrivateEvents() {
   return (
     <section aria-labelledby="events-title" id="private-events" className="scroll-mt-16 border-t border-line bg-stock/40">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-12">
-        <div className="lg:col-span-6">
+        <div className="order-2 grid grid-cols-2 gap-3 lg:order-last lg:col-span-12 lg:grid-cols-4">
+          <Framed photo={photos.events[0]} sizes="(min-width: 1024px) 50vw, 100vw" className="col-span-2 aspect-[4/3] lg:aspect-auto lg:min-h-[20rem]" />
+          <Framed photo={photos.events[1]} sizes="(min-width: 1024px) 25vw, 50vw" className="aspect-[3/4] lg:aspect-auto" />
+          <Framed photo={photos.events[2]} sizes="(min-width: 1024px) 25vw, 50vw" className="aspect-[3/4] lg:aspect-auto" />
+        </div>
+        <div className="order-1 lg:order-none lg:col-span-6">
           <SectionTitle id="events-title">Take the whole Vault</SectionTitle>
           <Lede className="mt-6">
             Club Vault has been a private event venue for South Florida since {venue.since}. Book part of the
@@ -302,7 +338,7 @@ function PrivateEvents() {
           </div>
         </div>
 
-        <div className="lg:col-span-6">
+        <div className="order-3 lg:order-none lg:col-span-6">
           <h3 className="mb-4 text-[1.25rem] font-semibold">Send an inquiry</h3>
           <InquiryForm />
         </div>
@@ -312,7 +348,6 @@ function PrivateEvents() {
 }
 
 function Gallery() {
-  const dir = path.join(process.cwd(), "public", "gallery");
   const shape: Record<string, string> = {
     tall: "row-span-2",
     wide: "col-span-2",
@@ -327,7 +362,7 @@ function Gallery() {
             <SectionTitle id="gallery-title">Inside the Vault</SectionTitle>
           </div>
           <Lede className="lg:col-span-5">
-            New photos of the room are coming soon. Until then, follow{" "}
+            Lounges, terraces, stages and celebrations. Follow{" "}
             <a href={venue.social[0].href} target="_blank" rel="noopener noreferrer" className="text-gold-bright underline underline-offset-4">
               {venue.social[0].handle}
             </a>{" "}
@@ -335,32 +370,17 @@ function Gallery() {
           </Lede>
         </div>
         <ul className="mt-12 grid grid-flow-dense auto-rows-[10.5rem] grid-cols-2 gap-3 sm:auto-rows-[13rem] sm:grid-cols-4">
-          {gallerySlots.map((slot, i) => {
-            const exists = fs.existsSync(path.join(dir, slot.file));
-            return (
-              <li key={slot.file} className={`relative overflow-hidden rounded-xl ${shape[slot.shape]}`}>
-                {exists ? (
-                  <Image
-                    src={`/gallery/${slot.file}`}
-                    alt={slot.hint}
-                    fill
-                    sizes="(min-width: 640px) 25vw, 50vw"
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="card-stock flex h-full flex-col justify-between border border-dashed border-line-strong p-4">
-                    <Camera className="size-5 text-gold-deep" aria-hidden />
-                    <div>
-                      <p className="stamp deboss text-[2rem]" aria-hidden>
-                        {String(i + 1).padStart(2, "0")}
-                      </p>
-                      <p className="mt-1 text-[0.85rem] text-muted">Photo coming soon: {slot.hint.toLowerCase()}</p>
-                    </div>
-                  </div>
-                )}
-              </li>
-            );
-          })}
+          {gallery.map((p) => (
+            <li key={p.src} className={`relative overflow-hidden rounded-xl border border-line bg-stock ${shape[p.shape]}`}>
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                sizes={p.shape === "wide" ? "(min-width: 640px) 50vw, 100vw" : "(min-width: 640px) 25vw, 50vw"}
+                className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+              />
+            </li>
+          ))}
         </ul>
       </div>
     </section>

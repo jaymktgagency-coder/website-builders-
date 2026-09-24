@@ -176,17 +176,45 @@ export const privateEvents = {
   showings: ["Mon – Thu · 10 AM – 7 PM", "Fri · 10 AM – 5 PM"],
 };
 
-// Drop real photos into /public/gallery using these filenames.
-export const gallerySlots = [
-  { file: "01.jpg", shape: "tall", hint: "The room at peak hour" },
-  { file: "02.jpg", shape: "wide", hint: "Bottle service moment" },
-  { file: "03.jpg", shape: "square", hint: "Bar & bartenders" },
-  { file: "04.jpg", shape: "square", hint: "DJ booth" },
-  { file: "05.jpg", shape: "wide", hint: "Crowd / dance floor" },
-  { file: "06.jpg", shape: "square", hint: "VIP table" },
-  { file: "07.jpg", shape: "square", hint: "Entrance / exterior" },
-  { file: "08.jpg", shape: "wide", hint: "Private event setup" },
-] as const;
+// Club Vault's own photos, from club-vault.com/gallery (downloaded Sept 2026).
+export type Photo = { src: string; alt: string; width: number; height: number };
+
+const photo = (file: string, width: number, height: number, alt: string): Photo => ({
+  src: `/photos/${file}`,
+  alt,
+  width,
+  height,
+});
+
+export const photos = {
+  hero: photo("hero-dance-floor.webp", 2500, 1875, "Club Vault's dance floor under purple and blue lights, with an illuminated stage and a mirror ball"),
+  nights: photo("main-room.jpg", 2048, 1365, "The main room at Club Vault: lounge booths beneath string lights and the neon VAULT sign"),
+  vip: [
+    photo("vip-outdoor-lounge.webp", 2048, 1365, "Outdoor lounge with white wicker sofas, navy cushions and blue LED lighting at night"),
+    photo("vip-vault-wall.webp", 2048, 1365, "Leather sofa and velvet rope in front of the green VAULT logo wall with neon angel wings"),
+  ],
+  bar: photo("bar.webp", 2048, 1365, "The Club Vault bar, with backlit bottle shelves, a big screen and the lit VAULT sign"),
+  events: [
+    photo("events-ceremony.jpg", 2048, 1536, "Rows of white chairs set for a ceremony under pink lights, hanging flowers and string lights"),
+    photo("events-banquet.jpg", 1600, 1066, "Round banquet table with gold chargers, crystal chairs and a tall white-rose centerpiece"),
+    photo("events-lounge-setup.webp", 1600, 1066, "Moroccan-style lounge setup with a gold sofa, lanterns and red and gold drapes"),
+  ],
+};
+
+export const gallery: (Photo & { shape: "wide" | "tall" | "square" })[] = [
+  { ...photo("lounge-cabanas.webp", 2048, 1365, "Outdoor lounge seating and cabanas lit in pink and blue at night"), shape: "wide" },
+  { ...photo("lounge-purple.webp", 960, 522, "Purple-lit lounge with sofas and round glowing wall lights"), shape: "square" },
+  { ...photo("cake.webp", 1066, 1600, "Tiered white cake decorated with pink flowers"), shape: "tall" },
+  { ...photo("stage.webp", 2048, 970, "Event stage with LED screens and balloons beneath the mirror ball"), shape: "square" },
+  { ...photo("dinner-red.webp", 1600, 757, "Guests at a banquet dinner in red light beneath projected arches"), shape: "wide" },
+  { ...photo("tent-lounge.jpg", 1600, 757, "Moroccan tent and lounge seating lit in red and amber"), shape: "square" },
+  { ...photo("terrace.webp", 2048, 1536, "Covered terrace with glowing canopies and rows of chairs"), shape: "wide" },
+  { ...photo("dessert-table.jpg", 1599, 758, "Guests at a dessert table during a private event"), shape: "wide" },
+  { ...photo("red-carpet-hall.webp", 2500, 1155, "Red carpet between blue-draped banquet tables in the event hall"), shape: "square" },
+  { ...photo("ceremony-aisle.jpg", 1599, 758, "Ceremony aisle lined with white chairs under string lights"), shape: "wide" },
+  { ...photo("dinner-purple.webp", 1600, 757, "Guests dining at a private event under soft purple light"), shape: "wide" },
+  { ...photo("balloon-backdrop.webp", 2048, 1365, "Paris-themed balloon backdrop with an Eiffel Tower display"), shape: "wide" },
+];
 
 /** Minutes → "7 PM" style label. */
 export function clock(mins: number) {

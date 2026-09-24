@@ -27,7 +27,7 @@ Anything set to `null` shows on the site as a labeled "to be announced" placehol
 
 ### Photos
 
-Put images in `public/gallery/` named `01.jpg` … `08.jpg`. Each slot's intended subject is listed in `gallerySlots`. A slot shows the photo automatically once its file exists (the next build picks it up).
+The photos in `public/photos/` are Club Vault's own, downloaded from club-vault.com/gallery. Where each one appears, and its alt text, is set in `photos` and `gallery` in `lib/venue.ts`. To swap one, replace the file (or add a new one) and update its `width`, `height` and `alt`.
 
 ## Before launch: facts to confirm with the club
 
@@ -38,7 +38,11 @@ Put images in `public/gallery/` named `01.jpg` … `08.jpg`. Each slot's intende
 
 ## Private event form
 
-There is no backend. The inquiry form opens the visitor's email app, pre-filled and addressed to `admin@megavaultinc.com`. To receive submissions directly, point `InquiryForm.tsx` at a form service (Formspree, Resend, etc.).
+Inquiries are sent through [FormSubmit](https://formsubmit.co) to `admin@megavaultinc.com` (`app/_components/InquiryForm.tsx`), with no backend needed.
+
+**One-time activation:** the first real submission makes FormSubmit email an activation link to admin@megavaultinc.com. Someone must click it before inquiries are delivered.
+
+After activating, you can swap the address in `ENDPOINT` for the random alias FormSubmit provides, so the email isn't exposed in the page source.
 
 ## SEO
 

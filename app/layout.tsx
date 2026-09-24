@@ -83,7 +83,7 @@ const jsonLd = {
   telephone: venue.phone.tel,
   email: venue.email,
   foundingDate: String(venue.since),
-  image: `${siteUrl}/opengraph-image`,
+  image: [`${siteUrl}/photos/hero-dance-floor.webp`, `${siteUrl}/photos/main-room.jpg`, `${siteUrl}/opengraph-image`],
   address: {
     "@type": "PostalAddress",
     streetAddress: venue.address.street,
