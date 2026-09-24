@@ -6,7 +6,7 @@ import { venue, privateEvents } from "@/lib/venue";
 type Errors = Partial<Record<"name" | "contact" | "type", string>>;
 
 const field =
-  "mt-2 block min-h-12 w-full rounded-lg border border-line bg-ink px-4 text-[1rem] text-paper placeholder:text-muted/70 transition-colors focus:border-gold focus:outline-none aria-[invalid=true]:border-[#e08a6a]";
+  "mt-2 block min-h-12 w-full rounded-lg border border-line bg-ink px-4 text-[1rem] text-paper placeholder:text-muted/70 transition-colors focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold aria-[invalid=true]:border-[#e08a6a]";
 
 /**
  * No booking backend exists yet, so the inquiry is composed into an email to
@@ -27,8 +27,8 @@ export function InquiryForm() {
     if (!v("type")) next.type = "Choose the kind of event you're planning.";
     setErrors(next);
     if (Object.keys(next).length) {
-      const first = e.currentTarget.querySelector<HTMLElement>("[aria-invalid=true]");
-      first?.focus();
+      const k = Object.keys(next)[0];
+      (e.currentTarget.elements.namedItem(k === "contact" ? "phone" : k) as HTMLElement | null)?.focus();
       return;
     }
 
@@ -52,21 +52,21 @@ export function InquiryForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block sm:col-span-2">
           <span className="text-[0.95rem] font-semibold">Your name</span>
-          <input name="name" autoComplete="name" className={field} aria-invalid={!!errors.name} aria-describedby="err-name" />
+          <input name="name" autoComplete="name" className={field} aria-invalid={!!errors.name} aria-describedby={errors.name ? "err-name" : undefined} />
           {errors.name && <span id="err-name" className="mt-2 block text-[0.9rem] text-[#f0a58a]">{errors.name}</span>}
         </label>
         <label className="block">
           <span className="text-[0.95rem] font-semibold">Phone</span>
-          <input name="phone" type="tel" autoComplete="tel" inputMode="tel" className={field} aria-invalid={!!errors.contact} aria-describedby="err-contact" />
+          <input name="phone" type="tel" autoComplete="tel" inputMode="tel" className={field} aria-invalid={!!errors.contact} aria-describedby={errors.contact ? "err-contact" : undefined} />
         </label>
         <label className="block">
           <span className="text-[0.95rem] font-semibold">Email</span>
-          <input name="email" type="email" autoComplete="email" className={field} aria-invalid={!!errors.contact} aria-describedby="err-contact" />
+          <input name="email" type="email" autoComplete="email" className={field} aria-invalid={!!errors.contact} aria-describedby={errors.contact ? "err-contact" : undefined} />
         </label>
         {errors.contact && <span id="err-contact" className="-mt-2 block text-[0.9rem] text-[#f0a58a] sm:col-span-2">{errors.contact}</span>}
         <label className="block sm:col-span-2">
           <span className="text-[0.95rem] font-semibold">Type of event</span>
-          <select name="type" defaultValue="" className={`${field} cursor-pointer`} aria-invalid={!!errors.type} aria-describedby="err-type">
+          <select name="type" defaultValue="" className={`${field} cursor-pointer`} aria-invalid={!!errors.type} aria-describedby={errors.type ? "err-type" : undefined}>
             <option value="" disabled>
               Choose one
             </option>
@@ -102,7 +102,7 @@ export function InquiryForm() {
       >
         Send inquiry
       </button>
-      <p className="mt-3 text-[0.88rem] text-muted" aria-live="polite">
+      <p className="mt-3 text-[0.88rem] text-muted" role="status">
         {sent
           ? `Your email app should now be open with the details filled in. If it didn't open, call ${privateEvents.contact.name} at ${privateEvents.contact.phone.display}.`
           : `Opens your email app, addressed to ${venue.email}.`}

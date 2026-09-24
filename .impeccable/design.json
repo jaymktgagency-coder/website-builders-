@@ -1,0 +1,16 @@
+{
+  "world": "black card / gold-foil stamped invitation",
+  "colors": {
+    "ink": "#0b0a08", "stock": "#14120e", "stock-2": "#1c1914", "deboss": "#2c2821",
+    "gold": "#d6b268", "gold-bright": "#f3dca6", "gold-deep": "#8f6d31",
+    "paper": "#f2ebdd", "muted": "#aaa190",
+    "line": "rgba(214,178,104,0.16)", "line-strong": "rgba(214,178,104,0.42)"
+  },
+  "fonts": {
+    "display": { "family": "Archivo", "width": 125, "weight": 800, "transform": "uppercase", "tracking": "-0.02em" },
+    "body": { "family": "Hanken Grotesk" }
+  },
+  "radii": { "control": "10px", "card": "12px", "pill": "9999px" },
+  "motion": { "signature": "foil highlight --sx follows pointer/scroll", "ease": "cubic-bezier(0.16,1,0.3,1)", "reducedMotion": "static" },
+  "rasters": []
+}

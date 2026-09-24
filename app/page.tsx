@@ -87,9 +87,9 @@ function Header() {
 function Hero() {
   return (
     <section aria-label="Club Vault" className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:min-h-[calc(92svh-4rem)] lg:grid-cols-12 lg:items-end lg:pb-20">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:min-h-[calc(84svh-4rem)] lg:grid-cols-12 lg:items-center lg:pb-20">
         <div className="min-w-0 lg:col-span-8">
-          <h1 className="stamp foil stamp-in text-[clamp(3.3rem,19.6vw,11.5rem)] leading-[0.8]">
+          <h1 className="stamp foil stamp-in text-[clamp(3.3rem,21.5vw,11.5rem)] leading-[0.8]">
             <span className="block">Club</span>
             <span className="block">Vault</span>
           </h1>
@@ -114,7 +114,7 @@ function Hero() {
             href={venue.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 self-start text-[0.9rem] text-muted underline-offset-4 transition-colors hover:text-gold-bright hover:underline"
+            className="inline-flex min-h-11 items-center gap-2 self-start text-[0.9rem] text-muted underline-offset-4 transition-colors hover:text-gold-bright hover:underline"
           >
             <span className="font-semibold tabular-nums text-paper">{venue.google.rating.toFixed(1)}</span>
             on Google · {venue.google.reviews} reviews
@@ -169,7 +169,14 @@ function Tables() {
             {bottlePackages.map((p, i) => (
               <li key={i} className="card-stock flex items-center justify-between gap-4 rounded-xl border border-dashed border-line-strong p-5">
                 <div className="min-w-0">
-                  <p className={`stamp text-[1.5rem] ${p.name ? "text-paper" : "deboss"}`}>{p.name ?? `Package ${i + 1}`}</p>
+                  {p.name ? (
+                    <p className="stamp text-[1.5rem] text-paper">{p.name}</p>
+                  ) : (
+                    <p className="stamp deboss text-[1.5rem]">
+                      <span aria-hidden>Package {i + 1}</span>
+                      <span className="sr-only">Package {i + 1}, details to be announced</span>
+                    </p>
+                  )}
                   <p className="mt-2 text-[0.95rem] text-muted">{p.details ?? "What's included: to be announced"}</p>
                 </div>
                 {p.price ? (
@@ -450,15 +457,14 @@ function Footer() {
           </div>
           <div>
             <h2 className="text-[0.95rem] font-semibold text-gold">Contact</h2>
-            <p className="mt-3">
-              <a href={`tel:${venue.phone.tel}`} className="tabular-nums text-paper hover:text-gold-bright">
+            <div className="mt-2">
+              <a href={`tel:${venue.phone.tel}`} className="flex min-h-11 items-center tabular-nums text-paper hover:text-gold-bright">
                 {venue.phone.display}
               </a>
-              <br />
-              <a href={`mailto:${venue.email}`} className="text-muted hover:text-paper">
+              <a href={`mailto:${venue.email}`} className="flex min-h-11 items-center text-muted hover:text-paper">
                 {venue.email}
               </a>
-            </p>
+            </div>
           </div>
           <div>
             <h2 className="text-[0.95rem] font-semibold text-gold">Follow</h2>
@@ -469,7 +475,7 @@ function Footer() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-10 items-center gap-1.5 text-paper transition-colors hover:text-gold-bright"
+                    className="inline-flex min-h-11 items-center gap-1.5 text-paper transition-colors hover:text-gold-bright"
                   >
                     {s.label} <span className="text-muted">{s.handle}</span>
                     <ArrowUpRight className="size-3.5 text-gold-deep" aria-hidden />

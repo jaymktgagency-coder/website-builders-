@@ -183,9 +183,9 @@ export const gallerySlots = [
   { file: "03.jpg", shape: "square", hint: "Bar & bartenders" },
   { file: "04.jpg", shape: "square", hint: "DJ booth" },
   { file: "05.jpg", shape: "wide", hint: "Crowd / dance floor" },
-  { file: "06.jpg", shape: "tall", hint: "VIP table" },
+  { file: "06.jpg", shape: "square", hint: "VIP table" },
   { file: "07.jpg", shape: "square", hint: "Entrance / exterior" },
-  { file: "08.jpg", shape: "square", hint: "Private event setup" },
+  { file: "08.jpg", shape: "wide", hint: "Private event setup" },
 ] as const;
 
 /** Minutes → "7 PM" style label. */
